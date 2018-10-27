@@ -140,14 +140,50 @@
                                 </ComboBox>
                                 <Button Grid.Row="5" Grid.Column="1" Name="btnUpdate" Content="Update" Width="150" Height="26" HorizontalAlignment="Right" Click="btnUpdate_Click"></Button>
                             </Grid>
-
-
                         </StackPanel>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Logs">
-                    
-                    
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50*"/>
+                            <RowDefinition Height="50*"/>
+                        </Grid.RowDefinitions>
+
+                        <ListView Name="lstDateTime" Grid.Row="0">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Date/Time" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Event" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="User ID" Width="150">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        
+                        
+                    </Grid>
+
                 </TabItem>
          </TabControl>
 
