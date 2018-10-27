@@ -10,35 +10,34 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Astro3
 {
     /// <summary>
-    /// Interaction logic for Dashboard.xaml
+    /// Interaction logic for Bookings.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class Bookings : Page
     {
-        public Dashboard()
+        public Bookings()
         {
             InitializeComponent();
         }
 
-        private void btnAdmin_Click(object sender, RoutedEventArgs e)
+        private void btnBook_Click(object sender, RoutedEventArgs e)
         {
-            Admin admin = new Admin();
-            frmMain.Navigate(admin);
+
         }
 
-        private void btnExit_Click(object sender, RoutedEventArgs e)
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+
         }
 
-        private void btnBookings_Click(object sender, RoutedEventArgs e)
+        private void btnRecurrence_Click(object sender, RoutedEventArgs e)
         {
-            Bookings bookings = new Bookings();
-            frmMain.Navigate(bookings);
+
         }
     }
 }
