@@ -17,20 +17,22 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <Calendar Height="170" 
                   HorizontalAlignment="Left" 
-                  Margin="58,32,0,0" 
+                  Margin="60,50,0,0" 
                   Name="calCalendar" 
                   VerticalAlignment="Top" 
                   Width="180"/>
 
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,100,0,5">
-            <Button Content="Book" Name="btnBook" Height="26" Width="100" Margin="20,0" Click="btnBook_Click" />
-            <Button Content="Delete" Name="btnDelete" Height="26" Width="100" Margin="20,0" Click="btnDelete_Click" />
-            <Button Content="Recurrence" Name="btnRecurrence" Height="26" Width="100" Margin="20,0" Click="btnRecurrence_Click" />
+        <StackPanel Grid.Row="0" 
+                    Grid.Column="1"    
+                    HorizontalAlignment="Center" 
+                    Margin="0,50,0,20">
+            <Button Content="Book" Name="btnBook" Height="26" Width="100" Margin="0,20" Click="btnBook_Click" />
+            <Button Content="Delete" Name="btnDelete" Height="26" Width="100" Margin="0,20" Click="btnDelete_Click" />
+            <Button Content="Recurrence" Name="btnRecurrence" Height="26" Width="100" Margin="0,20" Click="btnRecurrence_Click" />
 
         </StackPanel>
 
