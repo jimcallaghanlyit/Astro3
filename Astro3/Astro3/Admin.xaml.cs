@@ -24,5 +24,25 @@ namespace Astro3
         {
             InitializeComponent();
         }
+
+        private void submenuAddNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            stkUserDetails.Visibility = Visibility.Visible;
+        }
+
+        private void submenuModUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void submenuDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            stkUserDetails.Visibility = Visibility.Collapsed;
+        }
     }
 }
