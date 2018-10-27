@@ -9,6 +9,9 @@
       Title="Bookings">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\background_image.jpg" Stretch="UniformToFill" Opacity=".10"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*" />
             <ColumnDefinition Width="50*" />
