@@ -16,23 +16,13 @@ using System.Windows.Shapes;
 namespace Astro3
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Admin.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Admin : Page
     {
-        public MainWindow()
+        public Admin()
         {
             InitializeComponent();
-        }
-
-        private void btnOK_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

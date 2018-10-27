@@ -10,29 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Astro3
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Dashboard : Window
     {
-        public MainWindow()
+        public Dashboard()
         {
             InitializeComponent();
         }
 
-        private void btnOK_Click(object sender, RoutedEventArgs e)
+        private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
-
+            Admin admin = new Admin();
+            frmMain.Navigate(admin);
         }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }
