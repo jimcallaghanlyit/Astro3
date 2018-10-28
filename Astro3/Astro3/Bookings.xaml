@@ -82,7 +82,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="1" Grid.Column="2" Content="Available slots"/>
-                <ComboBox Grid.Row="4" Grid.Column="1" Width="150">
+                <ComboBox Name="cboAvailableSlots" Grid.Row="4" Grid.Column="1" Width="150">
                     <ComboBoxItem Content="5:00 PM - 6:00 PM"/>
                     <ComboBoxItem Content="6:00 PM - 7:00 PM"/>
                     <ComboBoxItem Content="7:00 PM - 8:00 PM"/>

@@ -39,5 +39,15 @@ namespace Astro3
         {
 
         }
+
+        private void Daily_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Weekly_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

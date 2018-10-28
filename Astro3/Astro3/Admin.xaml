@@ -157,7 +157,7 @@
                                 <TextBox Grid.Row="3" Grid.Column="1" Name="tbxFirstname"/>
                                 <TextBox Grid.Row="4" Grid.Column="1" Name="tbxClub"/>
                                 <TextBox Grid.Row="5" Grid.Column="1" Name="tbxIBAN"/>
-                                <ComboBox Grid.Row="6" Grid.Column="1" Width="150">
+                                <ComboBox Name="cboEditUserAccesslevel" Grid.Row="6" Grid.Column="1" Width="150">
                                     <ComboBoxItem Content="User"/>
                                     <ComboBoxItem Content="Administrator"/>
                                 </ComboBox>

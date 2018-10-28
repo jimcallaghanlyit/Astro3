@@ -41,12 +41,12 @@
                        Margin="5"/>
             <RadioButton x:Name="Daily" 
                          Margin="5" 
-                         Checked="Daily_Checked" 
+                         Checked="Daily_Checked"
                          GroupName="Frequency"
                          Content="Daily"/>
             <RadioButton x:Name="Weekly" 
                          Margin="5" 
-                         Checked="Weekly_Checked" 
+                         Checked="Weekly_Checked"
                          GroupName="Frequency"
                          Content="Weekly"/>
         </StackPanel>
@@ -114,13 +114,13 @@
                 <Label Grid.Row="5" Grid.Column="0" Content="10:00 PM - 11:00 PM"/>
                 <Label Grid.Row="6" Grid.Column="0" Content="11:00 PM - 12:00 AM"/>
                 
-                <TextBox Grid.Row="0" Grid.Column="1" Name="tbxUsername"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="tbxPassword"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Name="tbxSurname"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Name="tbxFirstname"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Name="tbxClub"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Name="tbxIBAN"/>
-                <TextBox Grid.Row="6" Grid.Column="1" Name="tbxTBD"/>
+                <TextBox Grid.Row="0" Grid.Column="1" Name="tbxSlot1"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="tbxSlot2"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="tbxSlot3"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="tbxSlot4"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="tbxSlot5"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Name="tbxSlot6"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Name="tbxSlot7"/>
 
             </Grid>
         </StackPanel>

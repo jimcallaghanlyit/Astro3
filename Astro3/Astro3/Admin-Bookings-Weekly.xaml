@@ -28,17 +28,18 @@
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
                     Margin="10,50,0,20">
-            <TextBlock Text="Frequency" 
+            <TextBlock Name="tbxFrequency"
+                       Text="Frequency" 
                        FontWeight="Bold"
                        Margin="5"/>
             <RadioButton x:Name="Daily" 
                          Margin="5" 
-                         Checked="Daily_Checked" 
+                         Checked="Daily_Checked"
                          GroupName="Frequency"
                          Content="Daily"/>
             <RadioButton x:Name="Weekly" 
                          Margin="5" 
-                         Checked="Weekly_Checked" 
+                         Checked="Weekly_Checked"
                          GroupName="Frequency"
                          Content="Weekly"/>
         </StackPanel>
