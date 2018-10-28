@@ -9,6 +9,9 @@
       Title="Admin">
 
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\background_image.jpg" Stretch="UniformToFill" Opacity=".10"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
