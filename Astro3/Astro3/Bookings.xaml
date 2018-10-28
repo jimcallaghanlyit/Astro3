@@ -20,6 +20,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         
         <Calendar Height="170" 
@@ -35,10 +36,22 @@
                     Margin="0,50,0,20">
             <Button Content="Book" Name="btnBook" Height="26" Width="100" Margin="0,20" Click="btnBook_Click" />
             <Button Content="Delete" Name="btnDelete" Height="26" Width="100" Margin="0,20" Click="btnDelete_Click" />
-            <Button Content="Recurrence" Name="btnRecurrence" Height="26" Width="100" Margin="0,20" Click="btnRecurrence_Click" />
 
         </StackPanel>
 
+
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="2"
+                    HorizontalAlignment="Center"
+                    Margin="0,50,0,20">
+            <Button Content="Recurrence" 
+                    Name="btnRecurrence" 
+                    Height="26" 
+                    Width="100" 
+                    Margin="0,20" 
+                    ToolTip="You must submit a Standing order form for recurring bookings"
+                    Click="btnRecurrence_Click" />
+        </StackPanel>
 
         <StackPanel Name="stkBookingDetails" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" Visibility="Visible">
             <Grid>

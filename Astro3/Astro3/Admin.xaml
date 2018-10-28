@@ -16,7 +16,7 @@
 
 
     <StackPanel>
-        <TabControl Height="400">
+        <TabControl Height="500">
                 <TabControl.Resources>
                     <Style TargetType="{x:Type TabItem}">
                         <Setter Property="FontSize" Value="14"/>
@@ -38,7 +38,7 @@
                         <ListView Name="lstUserList" Grid.Row="0">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Username" Width="150">
+                                    <GridViewColumn Header="Username" Width="100">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
@@ -46,7 +46,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="Password" Width="150">
+                                    <GridViewColumn Header="Password" Width="110">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
@@ -54,7 +54,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="SurName" Width="150">
+                                    <GridViewColumn Header="SurName" Width="110">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
@@ -62,7 +62,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="FirstName" Width="150">
+                                    <GridViewColumn Header="FirstName" Width="110">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
@@ -70,7 +70,23 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="Access level" Width="150">
+                                    <GridViewColumn Header="Club" Width="110">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="IBAN" Width="110">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Access level" Width="110">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
@@ -122,23 +138,30 @@
                                     <RowDefinition Height="16*"/>
                                     <RowDefinition Height="16*"/>
                                     <RowDefinition Height="16*"/>
+                                    <RowDefinition Height="16*"/>
+                                    <RowDefinition Height="16*"/>
+
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="Username"/>
                                 <Label Grid.Row="1" Grid.Column="0" Content="Password"/>
                                 <Label Grid.Row="2" Grid.Column="0" Content="Surname"/>
                                 <Label Grid.Row="3" Grid.Column="0" Content="Firstname"/>
-                                <Label Grid.Row="4" Grid.Column="0" Content="Access level"/>
+                                <Label Grid.Row="4" Grid.Column="0" Content="Club"/>
+                                <Label Grid.Row="5" Grid.Column="0" Content="IBAN"/>
+                                <Label Grid.Row="6" Grid.Column="0" Content="Access level"/>
 
                                 <TextBox Grid.Row="0" Grid.Column="1" Name="tbxUsername"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Name="tbxPassword"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" Name="tbxSurname"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" Name="tbxFirstname"/>
-                                <ComboBox Grid.Row="4" Grid.Column="1" Width="150">
+                                <TextBox Grid.Row="4" Grid.Column="1" Name="tbxClub"/>
+                                <TextBox Grid.Row="5" Grid.Column="1" Name="tbxIBAN"/>
+                                <ComboBox Grid.Row="6" Grid.Column="1" Width="150">
                                     <ComboBoxItem Content="User"/>
                                     <ComboBoxItem Content="Administrator"/>
                                 </ComboBox>
-                                <Button Grid.Row="5" Grid.Column="1" Name="btnUpdate" Content="Update" Width="150" Height="26" HorizontalAlignment="Right" Click="btnUpdate_Click"></Button>
+                                <Button Grid.Row="7" Grid.Column="1" Name="btnUpdate" Content="Update" Width="150" Height="26" HorizontalAlignment="Right" Click="btnUpdate_Click"></Button>
                             </Grid>
                         </StackPanel>
                     </Grid>
