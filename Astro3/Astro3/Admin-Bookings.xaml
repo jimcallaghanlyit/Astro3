@@ -1,0 +1,128 @@
+﻿<Page x:Class="Astro3.Admin_Bookings"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Astro3"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Admin_Bookings">
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\background_image.jpg" Stretch="UniformToFill" Opacity=".10"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="50*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Calendar Height="170" 
+                  HorizontalAlignment="Left" 
+                  Margin="60,50,0,0" 
+                  Name="calCalendar" 
+                  VerticalAlignment="Top" 
+                  Width="180"/>
+
+
+
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="0"
+                    VerticalAlignment="Top"
+                    Margin="10,50,0,20">
+            <TextBlock Text="Frequency" 
+                       FontWeight="Bold"
+                       Margin="5"/>
+            <RadioButton x:Name="Daily" 
+                         Margin="5" 
+                         Checked="Daily_Checked" 
+                         GroupName="Frequency"
+                         Content="Daily"/>
+            <RadioButton x:Name="Weekly" 
+                         Margin="5" 
+                         Checked="Weekly_Checked" 
+                         GroupName="Frequency"
+                         Content="Weekly"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="0"
+                    HorizontalAlignment="Left"
+                    Margin="10,150,0,20">
+            <Button Content="Back" 
+                    Name="btnBack" 
+                    Height="26" 
+                    Width="100" 
+                    Margin="0,20" 
+                    Click="btnBack_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" 
+                    Grid.Column="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Left"
+                    Margin="10,150,0,20">
+            <Button Content="Update" 
+                    Name="btnUpdate" 
+                    Width="100" 
+                    Height="26" 
+                    Margin="10,1" 
+                    Click="btnUpdate_Click"/>
+            <Button Content="Close" 
+                    Name="btnClose" 
+                    Width="100" 
+                    Height="26" 
+                    Margin="10,1" 
+                    Click="btnClose_Click"/>
+        </StackPanel>
+
+        <StackPanel Name="stkBookingSlots" 
+                    Grid.Row="0" 
+                    Grid.Column="1"  
+                    VerticalAlignment="Center" 
+                    Margin="0,50,0,0"
+                    Visibility="Visible">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+                    <RowDefinition Height="16*"/>
+
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="5:00 PM - 6:00 PM"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="6:00 PM - 7:00 PM"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="7:00 PM - 8:00 PM"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="8:00 PM - 9:00 PM"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="9:00 PM - 10:00 PM"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="10:00 PM - 11:00 PM"/>
+                <Label Grid.Row="6" Grid.Column="0" Content="11:00 PM - 12:00 AM"/>
+                
+                <TextBox Grid.Row="0" Grid.Column="1" Name="tbxUsername"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="tbxPassword"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Name="tbxSurname"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Name="tbxFirstname"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Name="tbxClub"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Name="tbxIBAN"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Name="tbxTBD"/>
+
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>
