@@ -86,7 +86,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="Access level" Width="110">
+                                    <GridViewColumn Header="Access level" Width="150">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap"/>
