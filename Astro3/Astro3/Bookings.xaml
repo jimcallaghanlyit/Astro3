@@ -91,11 +91,7 @@
                     <ComboBoxItem Content="10:00 PM - 11:00 PM"/>
                     <ComboBoxItem Content="11:00 PM - 12:00 AM"/>
                 </ComboBox>
-
-
             </Grid>
-
-
         </StackPanel>
 
     </Grid>
