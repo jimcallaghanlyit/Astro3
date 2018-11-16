@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,10 @@ namespace Astro3
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        AstroDBEntities db = new AstroDBEntities();
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -27,7 +32,22 @@ namespace Astro3
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-
+            int loginCounter = 0;
+            string currentUser = tbxUsername.Text;
+            string currentPassword = tbxPassword.Password;
+            foreach (var userRecord in db.Users)
+            {
+                if (userRecord.Username == currentUser && userRecord.Password == currentPassword)
+                {
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.ShowDialog();
+                }
+                else
+                {
+                    lblErrorMessage.Content = "Incorrect user details";
+                    loginCounter++;
+                }
+            }
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
