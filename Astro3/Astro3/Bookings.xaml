@@ -22,7 +22,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <Calendar Height="170" 
                   HorizontalAlignment="Left" 
                   Margin="60,50,0,0" 
@@ -94,5 +94,13 @@
             </Grid>
         </StackPanel>
 
+        <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,10,5,0" >
+            <Border BorderThickness="3" BorderBrush="Black" Margin="0,-229,0,0" Width="785">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" Opacity=".50" ShadowDepth="4" />
+                </Border.Effect>
+                <Frame Name="frmBooking" NavigationUIVisibility="Hidden" Margin="0,-106.2,0,106.2"/>
+            </Border>
+        </DockPanel>
     </Grid>
 </Page>

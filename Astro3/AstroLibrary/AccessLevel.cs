@@ -20,8 +20,8 @@ namespace AstroLibrary
             this.Users = new HashSet<User>();
         }
     
-        public int LevelID { get; set; }
-        public string JobRole { get; set; }
+        public int Level_ID { get; set; }
+        public string Job_Role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }

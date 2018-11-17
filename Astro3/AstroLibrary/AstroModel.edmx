@@ -4,69 +4,116 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AstroDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AstroDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccessLevel">
           <Key>
-            <PropertyRef Name="LevelID" />
+            <PropertyRef Name="Level_ID" />
           </Key>
-          <Property Name="LevelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="JobRole" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Level_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Job_Role" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
-            <PropertyRef Name="BookingID" />
+            <PropertyRef Name="Booking_ID" />
           </Key>
-          <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="SlotTime" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="ClubID" Type="int" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Booking_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
+          <Property Name="Slot_Time" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="Last_Update_Date" Type="datetime" Nullable="false" />
+          <Property Name="Current_Status" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Updated_By" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Booking_Type" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="Club">
+        <EntityType Name="Booking_Slot">
           <Key>
-            <PropertyRef Name="ClubID" />
+            <PropertyRef Name="Slot_ID" />
           </Key>
-          <Property Name="ClubID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Club" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="IBAN_Number" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="Slot_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Creation_Date" Type="int" Nullable="false" />
+          <Property Name="Slot_Time" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Booking_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking_Status_History">
+          <Key>
+            <PropertyRef Name="History_ID" />
+          </Key>
+          <Property Name="History_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
+          <Property Name="Created_By" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Comments" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Booking_ID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
-            <PropertyRef Name="LogID" />
+            <PropertyRef Name="Log_ID" />
           </Key>
-          <Property Name="LogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Log_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
           <Property Name="Category" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="User_ID" />
           </Key>
-          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Username" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Firstname" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Club" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="IBAN_Number" Type="nvarchar" MaxLength="40" Nullable="false" />
-          <Property Name="LevelID" Type="int" Nullable="false" />
-          <Property Name="ClubID" Type="int" Nullable="false" />
-          <Property Name="BookingID" Type="int" Nullable="false" />
+          <Property Name="Level_ID" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Booking_Slot_To_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Booking_Slot" Type="Self.Booking_Slot" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Booking_ID" />
+            </Principal>
+            <Dependent Role="Booking_Slot">
+              <PropertyRef Name="Booking_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Status_History_To_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="Booking_Status_History" Type="Self.Booking_Status_History" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Booking_ID" />
+            </Principal>
+            <Dependent Role="Booking_Status_History">
+              <PropertyRef Name="Booking_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_To_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Log_To_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Log" Type="Self.Log" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Log">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -75,43 +122,32 @@
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AccessLevel">
-              <PropertyRef Name="LevelID" />
+              <PropertyRef Name="Level_ID" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="LevelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_To_Booking">
-          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="BookingID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="BookingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_To_Club">
-          <End Role="Club" Type="Self.Club" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Club">
-              <PropertyRef Name="ClubID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="ClubID" />
+              <PropertyRef Name="Level_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AstroDBModelStoreContainer">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Club" EntityType="Self.Club" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking_Slot" EntityType="Self.Booking_Slot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking_Status_History" EntityType="Self.Booking_Status_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Booking_Slot_To_Booking" Association="Self.FK_Booking_Slot_To_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Booking_Slot" EntitySet="Booking_Slot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Status_History_To_Booking" Association="Self.FK_Booking_Status_History_To_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Booking_Status_History" EntitySet="Booking_Status_History" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_To_User" Association="Self.FK_Booking_To_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
           <AssociationSet Name="FK_Log_To_User" Association="Self.FK_Log_To_User">
             <End Role="User" EntitySet="User" />
             <End Role="Log" EntitySet="Log" />
@@ -120,153 +156,174 @@
             <End Role="AccessLevel" EntitySet="AccessLevel" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_To_Booking" Association="Self.FK_User_To_Booking">
-            <End Role="Booking" EntitySet="Booking" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_To_Club" Association="Self.FK_User_To_Club">
-            <End Role="Club" EntitySet="Club" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AstroDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AstroDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccessLevels" EntityType="AstroDBModel.AccessLevel" />
+          <EntitySet Name="Bookings" EntityType="AstroDBModel.Booking" />
+          <EntitySet Name="Booking_Slot" EntityType="AstroDBModel.Booking_Slot" />
+          <EntitySet Name="Booking_Status_History" EntityType="AstroDBModel.Booking_Status_History" />
+          <EntitySet Name="Logs" EntityType="AstroDBModel.Log" />
+          <AssociationSet Name="FK_Booking_Slot_To_Booking" Association="AstroDBModel.FK_Booking_Slot_To_Booking">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="Booking_Slot" EntitySet="Booking_Slot" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Status_History_To_Booking" Association="AstroDBModel.FK_Booking_Status_History_To_Booking">
+            <End Role="Booking" EntitySet="Bookings" />
+            <End Role="Booking_Status_History" EntitySet="Booking_Status_History" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="AstroDBModel.User" />
+          <AssociationSet Name="FK_User_To_AccessLevel" Association="AstroDBModel.FK_User_To_AccessLevel">
+            <End Role="AccessLevel" EntitySet="AccessLevels" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_To_User" Association="AstroDBModel.FK_Booking_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Booking" EntitySet="Bookings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_To_User" Association="AstroDBModel.FK_Log_To_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="AccessLevel">
           <Key>
-            <PropertyRef Name="LevelID" />
+            <PropertyRef Name="Level_ID" />
           </Key>
-          <Property Name="LevelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="JobRole" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_To_AccessLevel" FromRole="AccessLevel" ToRole="User" />
+          <Property Name="Level_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Job_Role" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="AstroDBModel.FK_User_To_AccessLevel" FromRole="AccessLevel" ToRole="User" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
-            <PropertyRef Name="BookingID" />
+            <PropertyRef Name="Booking_ID" />
           </Key>
-          <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="SlotTime" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ClubID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_To_Booking" FromRole="Booking" ToRole="User" />
+          <Property Name="Booking_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Slot_Time" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Last_Update_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Current_Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Updated_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Booking_Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Booking_Slot" Relationship="AstroDBModel.FK_Booking_Slot_To_Booking" FromRole="Booking" ToRole="Booking_Slot" />
+          <NavigationProperty Name="Booking_Status_History" Relationship="AstroDBModel.FK_Booking_Status_History_To_Booking" FromRole="Booking" ToRole="Booking_Status_History" />
+          <NavigationProperty Name="User" Relationship="AstroDBModel.FK_Booking_To_User" FromRole="Booking" ToRole="User" />
         </EntityType>
-        <EntityType Name="Club">
+        <EntityType Name="Booking_Slot">
           <Key>
-            <PropertyRef Name="ClubID" />
+            <PropertyRef Name="Slot_ID" />
           </Key>
-          <Property Name="ClubID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Club1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IBAN_Number" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="BookingID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_To_Club" FromRole="Club" ToRole="User" />
+          <Property Name="Slot_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Creation_Date" Type="Int32" Nullable="false" />
+          <Property Name="Slot_Time" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Booking_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Booking" Relationship="AstroDBModel.FK_Booking_Slot_To_Booking" FromRole="Booking_Slot" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Booking_Status_History">
+          <Key>
+            <PropertyRef Name="History_ID" />
+          </Key>
+          <Property Name="History_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Booking_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Booking" Relationship="AstroDBModel.FK_Booking_Status_History_To_Booking" FromRole="Booking_Status_History" ToRole="Booking" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
-            <PropertyRef Name="LogID" />
+            <PropertyRef Name="Log_ID" />
           </Key>
-          <Property Name="LogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Category" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Log_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Log_To_User" FromRole="Log" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="AstroDBModel.FK_Log_To_User" FromRole="Log" ToRole="User" />
         </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Firstname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Club" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IBAN_Number" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LevelID" Type="Int32" Nullable="false" />
-          <Property Name="ClubID" Type="Int32" Nullable="false" />
-          <Property Name="BookingID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="AccessLevel" Relationship="Self.FK_User_To_AccessLevel" FromRole="User" ToRole="AccessLevel" />
-          <NavigationProperty Name="Booking" Relationship="Self.FK_User_To_Booking" FromRole="User" ToRole="Booking" />
-          <NavigationProperty Name="Club1" Relationship="Self.FK_User_To_Club" FromRole="User" ToRole="Club" />
-          <NavigationProperty Name="Logs" Relationship="Self.FK_Log_To_User" FromRole="User" ToRole="Log" />
-        </EntityType>
-        <Association Name="FK_User_To_AccessLevel">
-          <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AccessLevel">
-              <PropertyRef Name="LevelID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="LevelID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_To_Booking">
-          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK_Booking_Slot_To_Booking">
+          <End Type="AstroDBModel.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="AstroDBModel.Booking_Slot" Role="Booking_Slot" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Booking">
-              <PropertyRef Name="BookingID" />
+              <PropertyRef Name="Booking_ID" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="BookingID" />
+            <Dependent Role="Booking_Slot">
+              <PropertyRef Name="Booking_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_To_Club">
-          <End Role="Club" Type="Self.Club" Multiplicity="1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
+        <Association Name="FK_Booking_Status_History_To_Booking">
+          <End Type="AstroDBModel.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="AstroDBModel.Booking_Status_History" Role="Booking_Status_History" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Club">
-              <PropertyRef Name="ClubID" />
+            <Principal Role="Booking">
+              <PropertyRef Name="Booking_ID" />
+            </Principal>
+            <Dependent Role="Booking_Status_History">
+              <PropertyRef Name="Booking_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Firstname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Club" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="IBAN_Number" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="Level_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AccessLevel" Relationship="AstroDBModel.FK_User_To_AccessLevel" FromRole="User" ToRole="AccessLevel" />
+          <NavigationProperty Name="Bookings" Relationship="AstroDBModel.FK_Booking_To_User" FromRole="User" ToRole="Booking" />
+          <NavigationProperty Name="Logs" Relationship="AstroDBModel.FK_Log_To_User" FromRole="User" ToRole="Log" />
+        </EntityType>
+        <Association Name="FK_User_To_AccessLevel">
+          <End Type="AstroDBModel.AccessLevel" Role="AccessLevel" Multiplicity="1" />
+          <End Type="AstroDBModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccessLevel">
+              <PropertyRef Name="Level_ID" />
             </Principal>
             <Dependent Role="User">
-              <PropertyRef Name="ClubID" />
+              <PropertyRef Name="Level_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_To_User">
+          <End Type="AstroDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="AstroDBModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Log_To_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <End Type="AstroDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="AstroDBModel.Log" Role="Log" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="User_ID" />
             </Principal>
             <Dependent Role="Log">
-              <PropertyRef Name="UserID" />
+              <PropertyRef Name="User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AstroDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AccessLevels" EntityType="Self.AccessLevel" />
-          <EntitySet Name="Bookings" EntityType="Self.Booking" />
-          <EntitySet Name="Clubs" EntityType="Self.Club" />
-          <EntitySet Name="Logs" EntityType="Self.Log" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_User_To_AccessLevel" Association="Self.FK_User_To_AccessLevel">
-            <End Role="AccessLevel" EntitySet="AccessLevels" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_To_Booking" Association="Self.FK_User_To_Booking">
-            <End Role="Booking" EntitySet="Bookings" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_To_Club" Association="Self.FK_User_To_Club">
-            <End Role="Club" EntitySet="Clubs" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Log_To_User" Association="Self.FK_Log_To_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Log" EntitySet="Logs" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -275,58 +332,70 @@
           <EntitySetMapping Name="AccessLevels">
             <EntityTypeMapping TypeName="AstroDBModel.AccessLevel">
               <MappingFragment StoreEntitySet="AccessLevel">
-                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
-                <ScalarProperty Name="JobRole" ColumnName="JobRole" />
+                <ScalarProperty Name="Job_Role" ColumnName="Job_Role" />
+                <ScalarProperty Name="Level_ID" ColumnName="Level_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="AstroDBModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
-                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="SlotTime" ColumnName="SlotTime" />
-                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Booking_Type" ColumnName="Booking_Type" />
+                <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
+                <ScalarProperty Name="Last_Update_Date" ColumnName="Last_Update_Date" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Slot_Time" ColumnName="Slot_Time" />
+                <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
+                <ScalarProperty Name="Booking_ID" ColumnName="Booking_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Clubs">
-            <EntityTypeMapping TypeName="AstroDBModel.Club">
-              <MappingFragment StoreEntitySet="Club">
-                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Club1" ColumnName="Club" />
-                <ScalarProperty Name="IBAN_Number" ColumnName="IBAN_Number" />
-                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <EntitySetMapping Name="Booking_Slot">
+            <EntityTypeMapping TypeName="AstroDBModel.Booking_Slot">
+              <MappingFragment StoreEntitySet="Booking_Slot">
+                <ScalarProperty Name="Booking_ID" ColumnName="Booking_ID" />
+                <ScalarProperty Name="Slot_Time" ColumnName="Slot_Time" />
+                <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
+                <ScalarProperty Name="Slot_ID" ColumnName="Slot_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking_Status_History">
+            <EntityTypeMapping TypeName="AstroDBModel.Booking_Status_History">
+              <MappingFragment StoreEntitySet="Booking_Status_History">
+                <ScalarProperty Name="Booking_ID" ColumnName="Booking_ID" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
+                <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="History_ID" ColumnName="History_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Logs">
             <EntityTypeMapping TypeName="AstroDBModel.Log">
               <MappingFragment StoreEntitySet="Log">
-                <ScalarProperty Name="LogID" ColumnName="LogID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Log_ID" ColumnName="Log_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="AstroDBModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
-                <ScalarProperty Name="Club" ColumnName="Club" />
+                <ScalarProperty Name="Level_ID" ColumnName="Level_ID" />
                 <ScalarProperty Name="IBAN_Number" ColumnName="IBAN_Number" />
-                <ScalarProperty Name="LevelID" ColumnName="LevelID" />
-                <ScalarProperty Name="ClubID" ColumnName="ClubID" />
-                <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+                <ScalarProperty Name="Club" ColumnName="Club" />
+                <ScalarProperty Name="Firstname" ColumnName="Firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -345,7 +414,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>

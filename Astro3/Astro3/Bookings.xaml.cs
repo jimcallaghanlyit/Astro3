@@ -37,7 +37,8 @@ namespace Astro3
 
         private void btnRecurrence_Click(object sender, RoutedEventArgs e)
         {
- 
+            User_Bookings2 bookings2 = new User_Bookings2();
+            frmBooking.Navigate(bookings2);
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

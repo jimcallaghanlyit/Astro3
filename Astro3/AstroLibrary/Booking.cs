@@ -17,17 +17,24 @@ namespace AstroLibrary
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Booking()
         {
-            this.Users = new HashSet<User>();
+            this.Booking_Slot = new HashSet<Booking_Slot>();
+            this.Booking_Status_History = new HashSet<Booking_Status_History>();
         }
     
-        public int BookingID { get; set; }
-        public System.DateTime Date { get; set; }
-        public string SlotTime { get; set; }
-        public int ClubID { get; set; }
-        public int UserID { get; set; }
-        public string Username { get; set; }
+        public int Booking_ID { get; set; }
+        public System.DateTime Creation_Date { get; set; }
+        public string Slot_Time { get; set; }
+        public int User_ID { get; set; }
+        public System.DateTime Last_Update_Date { get; set; }
+        public string Current_Status { get; set; }
+        public string Created_By { get; set; }
+        public string Updated_By { get; set; }
+        public string Booking_Type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Booking_Slot> Booking_Slot { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking_Status_History> Booking_Status_History { get; set; }
+        public virtual User User { get; set; }
     }
 }

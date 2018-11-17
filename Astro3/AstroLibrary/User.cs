@@ -17,23 +17,22 @@ namespace AstroLibrary
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Bookings = new HashSet<Booking>();
             this.Logs = new HashSet<Log>();
         }
     
-        public int UserID { get; set; }
+        public int User_ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Surname { get; set; }
         public string Firstname { get; set; }
         public string Club { get; set; }
         public string IBAN_Number { get; set; }
-        public int LevelID { get; set; }
-        public int ClubID { get; set; }
-        public int BookingID { get; set; }
+        public int Level_ID { get; set; }
     
         public virtual AccessLevel AccessLevel { get; set; }
-        public virtual Booking Booking { get; set; }
-        public virtual Club Club1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Booking> Bookings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Log> Logs { get; set; }
     }

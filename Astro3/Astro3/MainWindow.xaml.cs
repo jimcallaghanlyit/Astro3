@@ -40,11 +40,12 @@ namespace Astro3
                 if (userRecord.Username == currentUser && userRecord.Password == currentPassword)
                 {
                     Dashboard dashboard = new Dashboard();
+                    this.Close();
                     dashboard.ShowDialog();
                 }
                 else
                 {
-                    lblErrorMessage.Content = "Incorrect user details";
+                    lblErrorMessage.Content = "Username or password is incorrect";
                     loginCounter++;
                 }
             }
@@ -52,7 +53,7 @@ namespace Astro3
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

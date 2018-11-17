@@ -71,10 +71,13 @@
     <Compile Include="Booking.cs">
       <DependentUpon>AstroModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Club.cs">
+    <Compile Include="Booking_Slot.cs">
       <DependentUpon>AstroModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Booking_Status_History.cs">
+      <DependentUpon>AstroModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="Log.cs">
       <DependentUpon>AstroModel.tt</DependentUpon>
     </Compile>

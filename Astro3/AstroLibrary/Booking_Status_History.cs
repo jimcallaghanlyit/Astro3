@@ -12,14 +12,15 @@ namespace AstroLibrary
     using System;
     using System.Collections.Generic;
     
-    public partial class Log
+    public partial class Booking_Status_History
     {
-        public int Log_ID { get; set; }
-        public int User_ID { get; set; }
-        public string Category { get; set; }
-        public string Description { get; set; }
-        public System.DateTime Date { get; set; }
+        public int History_ID { get; set; }
+        public string Status { get; set; }
+        public System.DateTime Creation_Date { get; set; }
+        public string Created_By { get; set; }
+        public string Comments { get; set; }
+        public int Booking_ID { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual Booking Booking { get; set; }
     }
 }
