@@ -40,6 +40,7 @@ namespace Astro3
                 if (userRecord.Username == currentUser && userRecord.Password == currentPassword)
                 {
                     Dashboard dashboard = new Dashboard();
+                    dashboard.user = userRecord;
                     this.Close();
                     dashboard.ShowDialog();
                 }

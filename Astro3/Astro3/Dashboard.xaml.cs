@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace Astro3
     /// </summary>
     public partial class Dashboard : Window
     {
+
+        public User user = new User();
         public Dashboard()
         {
             InitializeComponent();
@@ -39,6 +42,25 @@ namespace Astro3
         {
             Bookings bookings = new Bookings();
             frmMain.Navigate(bookings);
+        }
+
+        private void CheckUserAccess(User user)
+        {
+            if (user.Level_ID == 1)
+            {
+                btnBookings.Visibility = Visibility.Visible;
+            }
+
+            if (user.Level_ID == 2)
+            {
+                btnAdmin.Visibility = Visibility.Visible;
+                btnBookings.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            CheckUserAccess(user);
         }
     }
 }

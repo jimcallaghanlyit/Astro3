@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         WindowState="Normal"
         WindowStyle="None"
+        Loaded="Window_Loaded"
         Title="Dashboard" Height="450" Width="800">
     <Grid>
         <Grid.Background>
@@ -30,8 +31,8 @@
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,5">
-            <Button Content="Bookings" Name="btnBookings" Height="26" Width="100" Margin="10,0" Click="btnBookings_Click" />
-            <Button Content="Admin" Name="btnAdmin" Height="26" Width="100" Margin="10,0" Click="btnAdmin_Click" />
+            <Button Content="Bookings" Name="btnBookings" Height="26" Width="100" Margin="10,0" Click="btnBookings_Click" VerticalAlignment="Top" Visibility="Collapsed"/>
+            <Button Content="Admin" Name="btnAdmin" Height="26" Width="100" Margin="10,0" Click="btnAdmin_Click" Visibility="Collapsed"/>
             <Button Content="Exit" Name="btnExit" Height="26" Width="100" Margin="45,0" Click="btnExit_Click" />
         </StackPanel>
 
