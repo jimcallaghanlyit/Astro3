@@ -31,7 +31,7 @@
             <PropertyRef Name="Slot_ID" />
           </Key>
           <Property Name="Slot_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Creation_Date" Type="int" Nullable="false" />
+          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
           <Property Name="Slot_Time" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Booking_ID" Type="int" Nullable="false" />
         </EntityType>
@@ -219,7 +219,7 @@
             <PropertyRef Name="Slot_ID" />
           </Key>
           <Property Name="Slot_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Creation_Date" Type="Int32" Nullable="false" />
+          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Slot_Time" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Booking_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Booking" Relationship="AstroDBModel.FK_Booking_Slot_To_Booking" FromRole="Booking_Slot" ToRole="Booking" />

@@ -95,7 +95,7 @@
         </StackPanel>
 
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5,10,5,0" >
-            <Border BorderThickness="3" BorderBrush="Black" Margin="0,-229,0,0" Width="785">
+            <Border BorderThickness="3" BorderBrush="Black" CornerRadius="10" Padding="4" Margin="0,-231,-270,5" >
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" Opacity=".50" ShadowDepth="4" />
                 </Border.Effect>

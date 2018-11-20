@@ -15,7 +15,7 @@ namespace AstroLibrary
     public partial class Booking_Slot
     {
         public int Slot_ID { get; set; }
-        public int Creation_Date { get; set; }
+        public System.DateTime Creation_Date { get; set; }
         public string Slot_Time { get; set; }
         public int Booking_ID { get; set; }
     
