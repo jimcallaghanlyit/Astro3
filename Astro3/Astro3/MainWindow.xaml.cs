@@ -55,6 +55,7 @@ namespace Astro3
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Environment.Exit(0);
         }
     }
 }

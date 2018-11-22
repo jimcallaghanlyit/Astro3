@@ -36,6 +36,7 @@ namespace Astro3
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+            Environment.Exit(0);
         }
 
         private void btnBookings_Click(object sender, RoutedEventArgs e)

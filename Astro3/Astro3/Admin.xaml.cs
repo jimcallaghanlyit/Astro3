@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace Astro3
     /// </summary>
     public partial class Admin : Page
     {
+
+        List<User> users = new List<User>();
         public Admin()
         {
             InitializeComponent();
@@ -43,6 +46,12 @@ namespace Astro3
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             stkUserDetails.Visibility = Visibility.Collapsed;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            lstUserList.ItemsSource = users;
+           
         }
     }
 }
