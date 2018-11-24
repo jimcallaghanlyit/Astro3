@@ -27,8 +27,6 @@ namespace AstroLibrary
     
         public virtual DbSet<AccessLevel> AccessLevels { get; set; }
         public virtual DbSet<Booking> Bookings { get; set; }
-        public virtual DbSet<Booking_Slot> Booking_Slot { get; set; }
-        public virtual DbSet<Booking_Status_History> Booking_Status_History { get; set; }
         public virtual DbSet<Log> Logs { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

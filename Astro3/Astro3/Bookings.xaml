@@ -28,7 +28,9 @@
                   Margin="60,50,0,0" 
                   Name="calCalendar" 
                   VerticalAlignment="Top" 
-                  Width="180"/>
+                  Width="180"
+                  SelectedDatesChanged="calCalendar_SelectedDatesChanged"
+                  />
 
         <StackPanel Grid.Row="0" 
                     Grid.Column="1"    
@@ -83,13 +85,7 @@
 
                 <Label Grid.Row="1" Grid.Column="2" Content="Available slots"/>
                 <ComboBox Name="cboAvailableSlots" Grid.Row="4" Grid.Column="1" Width="150">
-                    <ComboBoxItem Content="5:00 PM - 6:00 PM"/>
-                    <ComboBoxItem Content="6:00 PM - 7:00 PM"/>
-                    <ComboBoxItem Content="7:00 PM - 8:00 PM"/>
-                    <ComboBoxItem Content="8:00 PM - 9:00 PM"/>
-                    <ComboBoxItem Content="9:00 PM - 10:00 PM"/>
-                    <ComboBoxItem Content="10:00 PM - 11:00 PM"/>
-                    <ComboBoxItem Content="11:00 PM - 12:00 AM"/>
+                   
                 </ComboBox>
             </Grid>
         </StackPanel>

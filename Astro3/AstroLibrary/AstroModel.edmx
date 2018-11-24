@@ -18,33 +18,14 @@
           </Key>
           <Property Name="Booking_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Creation_Date" Type="datetime" Nullable="false" />
-          <Property Name="Slot_Time" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="User_ID" Type="int" Nullable="false" />
           <Property Name="Last_Update_Date" Type="datetime" Nullable="false" />
           <Property Name="Current_Status" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Updated_By" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Booking_Type" Type="varchar" MaxLength="30" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Booking_Slot">
-          <Key>
-            <PropertyRef Name="Slot_ID" />
-          </Key>
-          <Property Name="Slot_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
-          <Property Name="Slot_Time" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="Booking_ID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Booking_Status_History">
-          <Key>
-            <PropertyRef Name="History_ID" />
-          </Key>
-          <Property Name="History_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
-          <Property Name="Created_By" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Comments" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Booking_ID" Type="int" Nullable="false" />
+          <Property Name="Slot_Date" Type="datetime" Nullable="false" />
+          <Property Name="Slot_time" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -69,30 +50,6 @@
           <Property Name="IBAN_Number" Type="nvarchar" MaxLength="40" Nullable="false" />
           <Property Name="Level_ID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Booking_Slot_To_Booking">
-          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
-          <End Role="Booking_Slot" Type="Self.Booking_Slot" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="Booking_ID" />
-            </Principal>
-            <Dependent Role="Booking_Slot">
-              <PropertyRef Name="Booking_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Booking_Status_History_To_Booking">
-          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
-          <End Role="Booking_Status_History" Type="Self.Booking_Status_History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="Booking_ID" />
-            </Principal>
-            <Dependent Role="Booking_Status_History">
-              <PropertyRef Name="Booking_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Booking_To_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
@@ -132,18 +89,8 @@
         <EntityContainer Name="AstroDBModelStoreContainer">
           <EntitySet Name="AccessLevel" EntityType="Self.AccessLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Booking_Slot" EntityType="Self.Booking_Slot" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Booking_Status_History" EntityType="Self.Booking_Status_History" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Booking_Slot_To_Booking" Association="Self.FK_Booking_Slot_To_Booking">
-            <End Role="Booking" EntitySet="Booking" />
-            <End Role="Booking_Slot" EntitySet="Booking_Slot" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Booking_Status_History_To_Booking" Association="Self.FK_Booking_Status_History_To_Booking">
-            <End Role="Booking" EntitySet="Booking" />
-            <End Role="Booking_Status_History" EntitySet="Booking_Status_History" />
-          </AssociationSet>
           <AssociationSet Name="FK_Booking_To_User" Association="Self.FK_Booking_To_User">
             <End Role="User" EntitySet="User" />
             <End Role="Booking" EntitySet="Booking" />
@@ -164,17 +111,7 @@
         <EntityContainer Name="AstroDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccessLevels" EntityType="AstroDBModel.AccessLevel" />
           <EntitySet Name="Bookings" EntityType="AstroDBModel.Booking" />
-          <EntitySet Name="Booking_Slot" EntityType="AstroDBModel.Booking_Slot" />
-          <EntitySet Name="Booking_Status_History" EntityType="AstroDBModel.Booking_Status_History" />
           <EntitySet Name="Logs" EntityType="AstroDBModel.Log" />
-          <AssociationSet Name="FK_Booking_Slot_To_Booking" Association="AstroDBModel.FK_Booking_Slot_To_Booking">
-            <End Role="Booking" EntitySet="Bookings" />
-            <End Role="Booking_Slot" EntitySet="Booking_Slot" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Booking_Status_History_To_Booking" Association="AstroDBModel.FK_Booking_Status_History_To_Booking">
-            <End Role="Booking" EntitySet="Bookings" />
-            <End Role="Booking_Status_History" EntitySet="Booking_Status_History" />
-          </AssociationSet>
           <EntitySet Name="Users" EntityType="AstroDBModel.User" />
           <AssociationSet Name="FK_User_To_AccessLevel" Association="AstroDBModel.FK_User_To_AccessLevel">
             <End Role="AccessLevel" EntitySet="AccessLevels" />
@@ -203,38 +140,15 @@
           </Key>
           <Property Name="Booking_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Slot_Time" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="User_ID" Type="Int32" Nullable="false" />
           <Property Name="Last_Update_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Current_Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Updated_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Booking_Type" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Booking_Slot" Relationship="AstroDBModel.FK_Booking_Slot_To_Booking" FromRole="Booking" ToRole="Booking_Slot" />
-          <NavigationProperty Name="Booking_Status_History" Relationship="AstroDBModel.FK_Booking_Status_History_To_Booking" FromRole="Booking" ToRole="Booking_Status_History" />
           <NavigationProperty Name="User" Relationship="AstroDBModel.FK_Booking_To_User" FromRole="Booking" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Booking_Slot">
-          <Key>
-            <PropertyRef Name="Slot_ID" />
-          </Key>
-          <Property Name="Slot_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Slot_Time" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="Booking_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Booking" Relationship="AstroDBModel.FK_Booking_Slot_To_Booking" FromRole="Booking_Slot" ToRole="Booking" />
-        </EntityType>
-        <EntityType Name="Booking_Status_History">
-          <Key>
-            <PropertyRef Name="History_ID" />
-          </Key>
-          <Property Name="History_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Created_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Comments" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Booking_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Booking" Relationship="AstroDBModel.FK_Booking_Status_History_To_Booking" FromRole="Booking_Status_History" ToRole="Booking" />
+          <Property Name="Slot_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Slot_time" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -247,30 +161,6 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="AstroDBModel.FK_Log_To_User" FromRole="Log" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Booking_Slot_To_Booking">
-          <End Type="AstroDBModel.Booking" Role="Booking" Multiplicity="1" />
-          <End Type="AstroDBModel.Booking_Slot" Role="Booking_Slot" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="Booking_ID" />
-            </Principal>
-            <Dependent Role="Booking_Slot">
-              <PropertyRef Name="Booking_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Booking_Status_History_To_Booking">
-          <End Type="AstroDBModel.Booking" Role="Booking" Multiplicity="1" />
-          <End Type="AstroDBModel.Booking_Status_History" Role="Booking_Status_History" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Booking">
-              <PropertyRef Name="Booking_ID" />
-            </Principal>
-            <Dependent Role="Booking_Status_History">
-              <PropertyRef Name="Booking_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="User_ID" />
@@ -340,37 +230,16 @@
           <EntitySetMapping Name="Bookings">
             <EntityTypeMapping TypeName="AstroDBModel.Booking">
               <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="Slot_time" ColumnName="Slot_time" />
+                <ScalarProperty Name="Slot_Date" ColumnName="Slot_Date" />
                 <ScalarProperty Name="Booking_Type" ColumnName="Booking_Type" />
                 <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
                 <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
                 <ScalarProperty Name="Last_Update_Date" ColumnName="Last_Update_Date" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
-                <ScalarProperty Name="Slot_Time" ColumnName="Slot_Time" />
                 <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
                 <ScalarProperty Name="Booking_ID" ColumnName="Booking_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Booking_Slot">
-            <EntityTypeMapping TypeName="AstroDBModel.Booking_Slot">
-              <MappingFragment StoreEntitySet="Booking_Slot">
-                <ScalarProperty Name="Booking_ID" ColumnName="Booking_ID" />
-                <ScalarProperty Name="Slot_Time" ColumnName="Slot_Time" />
-                <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
-                <ScalarProperty Name="Slot_ID" ColumnName="Slot_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Booking_Status_History">
-            <EntityTypeMapping TypeName="AstroDBModel.Booking_Status_History">
-              <MappingFragment StoreEntitySet="Booking_Status_History">
-                <ScalarProperty Name="Booking_ID" ColumnName="Booking_ID" />
-                <ScalarProperty Name="Comments" ColumnName="Comments" />
-                <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="History_ID" ColumnName="History_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

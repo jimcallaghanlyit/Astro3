@@ -6,14 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8fff27e004a54fd7b48eed36695e8e35" Name="Diagram1">
         <AssociationConnector Association="AstroDBModel.FK_User_To_AccessLevel1" />
-        <AssociationConnector Association="AstroDBModel.FK_Booking_Slot_To_Booking" />
-        <AssociationConnector Association="AstroDBModel.FK_Booking_Status_History_To_Booking" />
         <AssociationConnector Association="AstroDBModel.FK_User_To_Booking1" />
         <AssociationConnector Association="AstroDBModel.FK_Log_To_User1" />
         <EntityTypeShape EntityType="AstroDBModel.AccessLevel" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="AstroDBModel.Booking" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="AstroDBModel.Booking_Slot" Width="1.5" PointX="2.75" PointY="4.75" />
-        <EntityTypeShape EntityType="AstroDBModel.Booking_Status_History" Width="1.5" PointX="4.75" PointY="4.75" />
         <EntityTypeShape EntityType="AstroDBModel.Log" Width="1.5" PointX="5.75" PointY="0.75" />
         <EntityTypeShape EntityType="AstroDBModel.User" Width="1.5" PointX="3" PointY="8" />
         <AssociationConnector Association="AstroDBModel.FK_User_To_AccessLevel" />
