@@ -62,18 +62,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Log_To_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Log" Type="Self.Log" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="User_ID" />
-            </Principal>
-            <Dependent Role="Log">
-              <PropertyRef Name="User_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_To_AccessLevel">
           <End Role="AccessLevel" Type="Self.AccessLevel" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -94,10 +82,6 @@
           <AssociationSet Name="FK_Booking_To_User" Association="Self.FK_Booking_To_User">
             <End Role="User" EntitySet="User" />
             <End Role="Booking" EntitySet="Booking" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Log_To_User" Association="Self.FK_Log_To_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Log" EntitySet="Log" />
           </AssociationSet>
           <AssociationSet Name="FK_User_To_AccessLevel" Association="Self.FK_User_To_AccessLevel">
             <End Role="AccessLevel" EntitySet="AccessLevel" />

@@ -54,7 +54,7 @@
                          Margin="0,10" 
                          TabIndex="1"
                          ToolTip="Please enter your password"/>
-            <Label Name="lblErrorMessage" Content="" Foreground="#FFDC0707" Margin="45,0" Height="42"/>
+            <Label Name="lblErrorMessage" Content="" />
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -68,8 +68,8 @@
             Grid.RowSpan="2"
             HorizontalAlignment="Left"
             Source="Images/Astro.jpg"   
-            Margin="20"
-            Stretch="None"/>
+            Margin="20,20,0,20"
+            Stretch="None" Width="199"/>
 
 
     </Grid>

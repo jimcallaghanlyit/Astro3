@@ -32,41 +32,104 @@ namespace Astro3
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-            int loginCounter = 0;
+            //int loginCounter = 0;
             User validatedUser = new User();
             bool login = false;
+            bool credentialsValidated = false;
             string currentUser = tbxUsername.Text;
             string currentPassword = tbxPassword.Password;
-            foreach (var userRecord in db.Users)
+            credentialsValidated = ValidateUserInput(currentUser, currentPassword);
+            if (credentialsValidated)
             {
-                if (userRecord.Username == currentUser && userRecord.Password == currentPassword)
+                validatedUser = GetUserRecord(currentUser, currentPassword);
+                if (validatedUser.User_ID > 0)
                 {
-
-                    login = true;
-                    validatedUser = userRecord;
-
+                    CreateLogEntry("Login", "User logged in successfully.", validatedUser.User_ID, validatedUser.Username);
+                    Dashboard dashboard = new Dashboard();
+                    dashboard.user = validatedUser;
+                    //dashboard.Owner = this;
+                    this.Close();
+                    dashboard.ShowDialog();
+                    //this.Hide();
                 }
-                else
+               else
                 {
-                    lblErrorMessage.Content = "Username or password is incorrect";
-                    loginCounter++;
+                    CreateLogEntry("Login", "The credentials entered do not exist in the database", 0, currentUser);
+                    MessageBox.Show("The credentials you entered do not exist in the database.  Please check and try again", "User login", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-            }
-            
-            if (login)
-            {
-                CreateLogEntry("Login", "User logged in successfully.", validatedUser.User_ID, validatedUser.Username);
-                Dashboard dashboard = new Dashboard();
-                dashboard.user = validatedUser;
-                //dashboard.Owner = this;
-                this.Close();
-                dashboard.ShowDialog();
-                //this.Hide();
             }
             else
             {
-                CreateLogEntry("Login", "User did not login.", 0, currentUser);
+                CreateLogEntry("Login", "User failed to log in successfully.", 0, currentUser);
+                MessageBox.Show("Error with your username or password.  Please check and try again.", "User login", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+                        
+        }
+
+        /// <summary>
+        /// Validates the user credentials against those in the SQL database.
+        /// </summary>
+        /// <param name="username">
+        /// Username entered by the user.
+        /// </param>
+        /// <param name="password">
+        /// Password entered by the user.
+        /// </param>
+        /// <returns>
+        /// Validated user.
+        /// </returns>
+        private bool ValidateUserInput(string username, string password)
+        {
+            // It is easier to set valdated to false
+            // inside ne of the checks than it is
+            // to validate each check
+            bool validated = true;
+            // Check username length & ensure not more 
+            // or less than specfified in DB table
+            if (username.Length == 0 || username.Length > 30)
+            {
+                validated = false;
+            }
+            // Check each character in Username and 
+            // make sure no numbers being used
+            foreach (char ch in username)
+            {
+                if (ch >= '0' && ch <= '9')
+                {
+                    validated = false;
+                }
+            }
+            // Check password length & ensure not more 
+            // or less than specfified in DB table
+            if (password.Length == 0 || password.Length > 30)
+            {
+                validated = false;
+            }
+            return validated;
+        }
+
+        /// <summary>
+        /// Validates the user credentials against those in the SQL database.
+        /// </summary>
+        /// <param name="username">
+        /// Username enterued by the User.
+        /// </param>
+        /// <param name="password">
+        /// Password entered by the User.
+        /// </param>
+        /// <returns>
+        /// Validated User.
+        /// </returns>
+        private User GetUserRecord(string username, string password)
+        {
+            // Gets the username and password passed to the method
+            // from the User table in the SQL database
+            User validatedUser = new User();
+            foreach (var user in db.Users.Where(t => t.Username == username && t.Password == password))
+            {
+                validatedUser = user;
+            }
+            return validatedUser;
         }
 
 
