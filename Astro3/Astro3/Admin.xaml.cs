@@ -32,25 +32,6 @@ namespace Astro3
             InitializeComponent();
         }
 
-        private void submenuAddNewUser_Click(object sender, RoutedEventArgs e)
-        {
-            stkUserDetails.Visibility = Visibility.Visible;
-        }
-
-        private void submenuModUser_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void submenuDeleteUser_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            stkUserDetails.Visibility = Visibility.Collapsed;
-        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -65,6 +46,45 @@ namespace Astro3
             {
                 logs.Add(log);
             }
+            cboEditUserAccesslevel.SelectedIndex = 0;
+        }
+
+
+
+        private void submenuAddNewUser_Click(object sender, RoutedEventArgs e)
+        {
+            stkUserDetails.Visibility = Visibility.Visible;
+        }
+
+
+
+        private void submenuModUser_Click(object sender, RoutedEventArgs e)
+        {
+            stkUserDetails.Visibility = Visibility.Visible;
+            
+        }
+
+        private void submenuDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            stkUserDetails.Visibility = Visibility.Collapsed;
+        }
+
+
+
+
+        private void cboEditUserAccesslevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var theComboBox = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)theComboBox.SelectedItem;
+            string value = item.Content.ToString();
+            //MessageBox.Show("Content of combobox is " + value);
         }
     }
 }

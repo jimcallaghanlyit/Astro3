@@ -1,6 +1,7 @@
 ﻿using AstroLibrary;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,13 @@ namespace Astro3
             InitializeComponent();
         }
 
+
+        /// <summary>
+        /// User selects OK at logon screen prompts some back end code to 
+        /// run and verify that credentials added are valid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             //int loginCounter = 0;
@@ -122,17 +130,42 @@ namespace Astro3
         /// </returns>
         private User GetUserRecord(string username, string password)
         {
-            // Gets the username and password passed to the method
-            // from the User table in the SQL database
             User validatedUser = new User();
-            foreach (var user in db.Users.Where(t => t.Username == username && t.Password == password))
+            try
             {
-                validatedUser = user;
+                // Gets the username and password passed to the method
+                // from the User table in the SQL database
+
+                foreach (var user in db.Users.Where(t => t.Username == username && t.Password == password))
+                {
+                    validatedUser = user;
+                }
+            }
+            catch(EntityException ex)
+            {
+                MessageBox.Show("Problem connecting to the SQL server. Application will not close. See exception " + ex.InnerException, "Connect to Database.", MessageBoxButton.OK, MessageBoxImage.Error);
+                this.Close();
+                Environment.Exit(0);
             }
             return validatedUser;
         }
 
 
+        /// <summary>
+        /// Creates log entries in the database
+        /// </summary>
+        /// <param name="category">
+        /// Determines the category of the event
+        /// </param>
+        /// <param name="description">
+        /// Description of the event
+        /// </param>
+        /// <param name="userID">
+        /// The userID that generates the event
+        /// </param>
+        /// <param name="userName">
+        /// The Username that generates the event
+        /// </param>
         private void CreateLogEntry(string category, string description, int userID, string userName)
         {
             string comment = $"{description} user credentials = {userName}";
@@ -144,6 +177,13 @@ namespace Astro3
             SaveLog(log);
         }
 
+
+        /// <summary>
+        /// Saves the events to the log file
+        /// </summary>
+        /// <param name="log">
+        /// Generated event is saved to the log file
+        /// </param>
         private void SaveLog(Log log)
         {
             db.Entry(log).State = System.Data.Entity.EntityState.Added;
