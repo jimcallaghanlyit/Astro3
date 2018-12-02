@@ -24,7 +24,7 @@ namespace Astro3
     {
 
         AstroDBEntities db = new AstroDBEntities();
-
+        private object frmMain;
 
         public MainWindow()
         {
@@ -197,5 +197,12 @@ namespace Astro3
             this.Close();
             Environment.Exit(0);
         }
+
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterUser register = new RegisterUser();
+            frmMainWindow.Navigate(register);
+        }
+
     }
 }

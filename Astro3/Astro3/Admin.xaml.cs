@@ -58,15 +58,32 @@ namespace Astro3
 
 
 
+
         private void submenuModUser_Click(object sender, RoutedEventArgs e)
         {
             stkUserDetails.Visibility = Visibility.Visible;
+            //dbOperation = DBOperation.Modify;
             
         }
 
+
+
+
         private void submenuDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            
+            //db.Users.RemoveRange(db.Users.Where(t => t.User_ID == selectedUser.User_ID));
+            int saveSuccess = db.SaveChanges();
+            if(saveSuccess == 1)
+            {
+                //MessageBox.Show("User modified successfully.", "Save to database", MessageBoxButton.OK, MessageBoxImage.Information);
+                //RefreshUserList();
+                //ClearUserDetails();
+                //stkUserDetails.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                MessageBox.Show("Problem deleting User record.", "Delete from database", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
 

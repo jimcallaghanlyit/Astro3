@@ -95,7 +95,7 @@
                 <Border.Effect>
                     <DropShadowEffect Color="Gray" Opacity=".50" ShadowDepth="4" />
                 </Border.Effect>
-                <Frame Name="frmBooking" NavigationUIVisibility="Hidden" Margin="0,-106.2,0,106.2"/>
+                <Frame Name="frmBooking" NavigationUIVisibility="Hidden" Margin="0,-126,0,126"/>
             </Border>
         </DockPanel>
     </Grid>

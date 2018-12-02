@@ -50,11 +50,16 @@ namespace Astro3
             
         }
 
+
+        /// <summary>
+        /// Populates slots available for selection based on date selected
+        /// </summary>
+        /// <param name="selectedDate"></param>
         private void populateAvilableSlots(DateTime selectedDate)
         {
             cboAvailableSlots.Items.Clear();
             var query = db.Bookings.Where(row => row.Slot_Date == selectedDate);
-            //todo
+            // Query DB for Bookings 
             List<int> slots = new List<int> { 5, 6, 7, 8, 9, 10, 11 };
 
             //populate a list with all slot times 
