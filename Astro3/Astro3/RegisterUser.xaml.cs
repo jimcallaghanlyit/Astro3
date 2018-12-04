@@ -32,13 +32,56 @@ namespace Astro3
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            User newuser = new User();
+            newuser.Level_ID = 1;
 
+            if (tbxUsername.Text.Length > 0)
+            {
+                newuser.Username = tbxUsername.Text;
+            }
+            if (tbxPassword.Text.Length > 0)
+            {
+                newuser.Password = tbxPassword.Text;
+            }
+            if (tbxSurname.Text.Length > 0)
+            {
+                newuser.Surname = tbxSurname.Text;
+            }
+            if (tbxFirstname.Text.Length > 0)
+            {
+                newuser.Firstname = tbxFirstname.Text;
+            }
+            if (tbxClub.Text.Length > 0)
+            {
+                newuser.Club = tbxClub.Text;
+            }
+            if (tbxEmail.Text.Length > 0)
+            {
+                newuser.Email = tbxEmail.Text;
+            }
+
+
+
+          
+
+            try
+            {
+                db.Users.Add(newuser);
+                db.SaveChanges();
+                MessageBox.Show("User Added.", "New User", MessageBoxButton.OK, MessageBoxImage.Information);
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Try again.", "Error Creating User", MessageBoxButton.OK, MessageBoxImage.Information);
+            }  
+
+
+            
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            Environment.Exit(0);
-        }
+       
+
+       
     }
 }

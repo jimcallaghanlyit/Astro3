@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Astro3"
         mc:Ignorable="d"
         WindowState="Normal"
-        WindowStyle="None"
+        
         Loaded="Window_Loaded"
         Title="Dashboard" Height="450" Width="800">
     <Grid>

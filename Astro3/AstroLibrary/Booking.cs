@@ -21,9 +21,10 @@ namespace AstroLibrary
         public string Current_Status { get; set; }
         public string Created_By { get; set; }
         public string Updated_By { get; set; }
-        public string Booking_Type { get; set; }
         public System.DateTime Slot_Date { get; set; }
         public int Slot_time { get; set; }
+        public Nullable<int> Frequency { get; set; }
+        public string days { get; set; }
     
         public virtual User User { get; set; }
     }

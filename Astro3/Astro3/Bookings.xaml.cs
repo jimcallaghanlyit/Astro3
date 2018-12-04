@@ -22,6 +22,7 @@ namespace Astro3
     public partial class Bookings : Page
     {
         AstroDBEntities db = new AstroDBEntities();
+        Booking newbooking = new Booking();
         public Bookings()
         {
             
@@ -31,6 +32,7 @@ namespace Astro3
 
         private void btnBook_Click(object sender, RoutedEventArgs e)
         {
+
 
         }
 
@@ -42,7 +44,18 @@ namespace Astro3
         private void btnRecurrence_Click(object sender, RoutedEventArgs e)
         {
             User_Bookings2 bookings2 = new User_Bookings2();
-            frmBooking.Navigate(bookings2);
+            bookings2.ShowDialog();
+
+            newbooking.Frequency = bookings2.Frequency;
+            
+               //todo to add a string holding the days numbers
+            for(int i = 0; i < bookings2.Days.Count(); i++)
+            {
+                if(!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) //(newbooking.days.Length > 0)
+                    newbooking.days +=",";
+                newbooking.days +=  bookings2.Days[i].ToString();                             
+            }           
+
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

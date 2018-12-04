@@ -24,7 +24,7 @@ namespace Astro3
     {
 
         AstroDBEntities db = new AstroDBEntities();
-        private object frmMain;
+     
 
         public MainWindow()
         {
@@ -40,9 +40,10 @@ namespace Astro3
         /// <param name="e"></param>
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+
             //int loginCounter = 0;
             User validatedUser = new User();
-            bool login = false;
+            //bool login = false;
             bool credentialsValidated = false;
             string currentUser = tbxUsername.Text;
             string currentPassword = tbxPassword.Password;
@@ -201,7 +202,7 @@ namespace Astro3
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             RegisterUser register = new RegisterUser();
-            frmMainWindow.Navigate(register);
+            register.ShowDialog();
         }
 
     }

@@ -18,111 +18,76 @@ namespace Astro3
     /// <summary>
     /// Interaction logic for User_Bookings2.xaml
     /// </summary>
-    public partial class User_Bookings2 : Page
+    public partial class User_Bookings2 : Window
     {
+        int frequency=0;// 0 is no reapt 
+        public int Frequency
+        {
+            get
+            {
+                return frequency;
+            }  
+        }
+
+
+        List<int> days = new List<int>();
+
+        public List<int> Days
+        {
+            get
+            {
+                return days;
+            }
+        }
+
+
         public User_Bookings2()
         {
             InitializeComponent();
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Daily_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Weekly_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Monday_Indeterminate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Monday_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Monday_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Tuesday_Indeterminate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Tuesday_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Tuesday_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Wednesday_Indeterminate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Wednesday_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Wednesday_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Thursday_Indeterminate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Thursday_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Thursday_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Friday_Indeterminate(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Friday_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Friday_Unchecked(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
+            if (Weekly.IsChecked == true)
+            {
+                frequency = 2;
+            }
+            else
+            {
+                frequency = 1;
+            }
 
+            if (Monday.IsChecked==true)
+            {
+                days.Add(1);
+            }
+            if (Tuesday.IsChecked == true)
+            {
+                days.Add(2);
+            }
+            if (Wednesday.IsChecked == true)
+            {
+                days.Add(3);
+            }
+            if (Thursday.IsChecked == true)
+            {
+                days.Add(4);
+            }
+            if (Friday.IsChecked == true)
+            {
+                days.Add(5);
+            }
+
+            this.Close();
         }
 
-        private void btnClose_Click(object sender, RoutedEventArgs e)
-        {
+       
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

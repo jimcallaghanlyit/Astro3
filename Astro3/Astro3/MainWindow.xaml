@@ -63,16 +63,16 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="OK" Name="btnOK" Width="120" Height="26" Margin="10,1" Click="btnOK_Click"/>
+            <Button Content="OK" Name="btnOK" Width="120" Margin="10,2" Click="btnOK_Click"/>
             <Button Content="Close" Name="btnClose" Width="120" Height="26" Margin="10,1" Click="btnClose_Click"/>
         </StackPanel>
 
         <StackPanel Grid.Column="2" HorizontalAlignment="Left" Margin="99,3,0,0" Grid.Row="2">
             <Button Content="Register" Width="120" Height="26" Click="btnRegister_Click"/>
         </StackPanel>
-        <Frame x:Name="frmMainWindow"/>
 
-        
+
+
         <Image
             Grid.Row="1"
             Grid.Column="2"
@@ -80,7 +80,7 @@
             Source="Images/Astro.jpg"   
             Margin="20,10,0,0"
             Stretch="None" Width="199"/>
-        
-        
+
+
     </Grid>
 </Window>
