@@ -39,7 +39,7 @@
                             <RowDefinition Height="50*"/>
                         </Grid.RowDefinitions>
 
-                        <ListView Name="lstUserList" Grid.Row="0">
+                        <ListView Name="lstUserList" Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="lstUserList_SelectionChanged">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Username" Width="100">
@@ -82,10 +82,10 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="IBAN" Width="110">
+                                    <GridViewColumn Header="Email" Width="110">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding IBAN_Number}"/>
+                                                <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Email}"/>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -128,7 +128,7 @@
                             </ListView.ContextMenu>
                         </ListView>
 
-                        <StackPanel Name="stkUserDetails" Grid.Row="1" HorizontalAlignment="Center" Visibility="Collapsed">
+                        <StackPanel Name="stkUserDetails" Grid.Row="1" HorizontalAlignment="Center" Visibility="Collapsed" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="30*"/>
@@ -146,26 +146,44 @@
                                     <RowDefinition Height="16*"/>
 
                                 </Grid.RowDefinitions>
-
+                                
+                                <!--Row 0-->
                                 <Label Grid.Row="0" Grid.Column="0" Content="Username"/>
-                                <Label Grid.Row="1" Grid.Column="0" Content="Password"/>
-                                <Label Grid.Row="2" Grid.Column="0" Content="Surname"/>
-                                <Label Grid.Row="3" Grid.Column="0" Content="Firstname"/>
-                                <Label Grid.Row="4" Grid.Column="0" Content="Club"/>
-                                <Label Grid.Row="5" Grid.Column="0" Content="IBAN"/>
-                                <Label Grid.Row="6" Grid.Column="0" Content="Access level"/>
-
                                 <TextBox Grid.Row="0" Grid.Column="1" Name="tbxUsername"/>
+                                
+                                <!--Row 1-->
+                                <Label Grid.Row="1" Grid.Column="0" Content="Password"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Name="tbxPassword"/>
+                                
+                                <!--Row 2-->
+                                <Label Grid.Row="2" Grid.Column="0" Content="Surname"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" Name="tbxSurname"/>
+                                
+                                <!--Row 3-->
+                                <Label Grid.Row="3" Grid.Column="0" Content="Firstname"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" Name="tbxFirstname"/>
+                                
+                                <!--Row 4-->
+                                <Label Grid.Row="4" Grid.Column="0" Content="Club"/>
                                 <TextBox Grid.Row="4" Grid.Column="1" Name="tbxClub"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Name="tbxIBAN"/>
-                                <ComboBox Name="cboEditUserAccesslevel" Grid.Row="6" Grid.Column="1" Width="150" SelectionChanged="cboEditUserAccesslevel_SelectionChanged">
+                                
+                                <!--Row 5-->
+                                <Label Grid.Row="5" Grid.Column="0" Content="Email"/>
+                                <TextBox Grid.Row="5" Grid.Column="1" Name="tbxEmail"/>
+                                
+                                <!--Row 6-->
+                                <Label Grid.Row="6" Grid.Column="0" Content="Access level" HorizontalAlignment="Left"/>
+                                <ComboBox Name="cboEditUserAccesslevel" Grid.Row="6" Grid.Column="1" SelectionChanged="cboEditUserAccesslevel_SelectionChanged">
+                                    <ComboBoxItem Content="Please select"/>
                                     <ComboBoxItem Content="User"/>
                                     <ComboBoxItem Content="Administrator"/>
                                 </ComboBox>
-                                <Button Grid.Row="7" Grid.Column="1" Name="btnUpdate" Content="Update" Width="150" Height="26" HorizontalAlignment="Right" Click="btnUpdate_Click"></Button>
+                                
+                                <!--Row 7-->
+                                <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+                                    <Button Name="btnUpdate" Content="Update" Width="100" Height="26" Margin="10,0" HorizontalAlignment="Center" Click="btnUpdate_Click"></Button>
+                                    <Button Name="btnCancel" Content="Cancel" Width="100" Height="26" Margin="10,0" Click="btnUpdate_Click"></Button>
+                                </StackPanel>
                             </Grid>
                         </StackPanel>
                     </Grid>
