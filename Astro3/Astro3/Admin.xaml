@@ -221,10 +221,60 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                        
-                        
                     </Grid>
+                </TabItem>
 
+                <TabItem Header="Analysis">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        
+                        <!--Row 0-->
+                        <ScrollViewer Grid.Row="0" Margin="10">
+                            <TextBlock Name="tbxAnalysisOutput" TextWrapping="Wrap" FontSize="16" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                        </ScrollViewer>
+
+                        <StackPanel Grid.Row="2" VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                    <RowDefinition Height="1*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <!--Row 0 Stackpanel-->
+                                <Label Grid.Row="0" Content="Please choose an analysis type" HorizontalAlignment="Center" FontSize="16"/>
+                                <Label Grid.Row="0" Grid.Column="1" Content="Please choose a database table" HorizontalAlignment="Center" FontSize="16"/>
+                                
+                                
+                                <!--Row 1 Stackpanel-->
+                                <ComboBox Name="cboAnalysisType" Margin="0,10"  Grid.Row="1" Grid.Column="0" Width="150" Height="26" SelectedIndex="0" SelectionChanged="cboAnalysisType_SelectionChanged">
+                                    <ComboBoxItem Content="Please select"/>
+                                    <ComboBoxItem Content="Summary"/>
+                                </ComboBox>
+
+
+                                <ComboBox Name="cboDatabaseTable" Margin="0,10" Grid.Row="1" Grid.Column="1" Width="150" Height="26" SelectedIndex="0" SelectionChanged="cboDatabaseTable_SelectionChanged">
+                                    <ComboBoxItem Content="Please select"/>
+                                    <ComboBoxItem Content="Users"/>
+                                    <ComboBoxItem Content="Access Level"/>
+                                    <ComboBoxItem Content="Bookings"/>
+                                </ComboBox>
+                                
+                                <!--Row 2-->
+                                <Button Name="btnAnalyse" Grid.Row="2" Grid.Column="1" Height="26" Width="150" Content="Analyse" Click="btnAnalyse_Click" />
+
+                            </Grid>
+                        </StackPanel>
+
+                    </Grid>
                 </TabItem>
          </TabControl>
 

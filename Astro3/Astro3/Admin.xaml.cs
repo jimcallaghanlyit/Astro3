@@ -27,6 +27,12 @@ namespace Astro3
         List<User> users = new List<User>();
         List<Log> logs = new List<Log>();
 
+        //Added for the Analysis tab
+        List<User> userList = new List<User>();
+        List<AccessLevel> accesslevelList = new List<AccessLevel>();
+        List<Booking> bookingList = new List<Booking>();
+
+
         User selectedUser = new User();
 
         enum DBOperation
@@ -38,6 +44,23 @@ namespace Astro3
 
         DBOperation dbOperation = new DBOperation();
 
+        //Define enum type for Summary in Analysis
+        enum AnalysisType
+        {
+            Summary
+        }
+
+        private AnalysisType analysisType = new AnalysisType();
+
+        //Define enum type for DB Table selected in Analysis
+        enum DBTableSelected
+        {
+            Users,
+            AccessLevel,
+            Bookings
+        }
+
+        private DBTableSelected tableSelected = new DBTableSelected();
 
 
         public Admin()
@@ -57,7 +80,16 @@ namespace Astro3
                 logs.Add(log);
             }
             cboEditUserAccesslevel.SelectedIndex = 0;
+
+
+            foreach (var userRecord in db.Users)
+            {
+                userList.Add(userRecord);
+            }
+
+
         }
+
 
 
 
@@ -220,5 +252,94 @@ namespace Astro3
 
             }
         }
+
+        private void cboAnalysisType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Check that an option has been selected 
+            //The selectedIndex will be 0 if an option is not selected
+            if (cboAnalysisType.SelectedIndex > 0)
+            {
+                if (cboAnalysisType.SelectedIndex == 1)
+                {
+                    analysisType = AnalysisType.Summary;
+                }
+            }
+        }
+
+        private void cboDatabaseTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Check that an option has been selected 
+            //The selectedIndex will be 0 if an option is not selected
+            if (cboDatabaseTable.SelectedIndex > 0)
+            {
+                if (cboDatabaseTable.SelectedIndex == 1)
+                {
+                    tableSelected = DBTableSelected.Users;
+                }
+
+                if (cboDatabaseTable.SelectedIndex == 2)
+                {
+                    tableSelected = DBTableSelected.AccessLevel;
+                }
+
+                if (cboDatabaseTable.SelectedIndex == 3)
+                {
+                    tableSelected = DBTableSelected.Bookings;
+                }
+            }
+        }
+
+        private void btnAnalyse_Click(object sender, RoutedEventArgs e)
+        {
+            //Clear variables. Record count is used to display
+            //count value beside each record
+            int recordCount = 0;
+            string output = "";
+            tbxAnalysisOutput.Text = "";
+
+
+            //Display Users list in Analyse table
+            if (analysisType == AnalysisType.Summary && tableSelected == DBTableSelected.Users)
+            {
+                foreach (var item in userList)
+                {
+                    recordCount++;
+                    output = output + Environment.NewLine + $"Record {recordCount} is for user " +
+                        $"named {item.Firstname} {item.Surname}" + Environment.NewLine;
+                    
+                }
+                output = output + Environment.NewLine + $"Total records = {recordCount}" + Environment.NewLine;
+                tbxAnalysisOutput.Text = output;                               
+            }
+
+            //Display Bookings list in Analyse table
+            if (analysisType == AnalysisType.Summary && tableSelected == DBTableSelected.Bookings)
+            {
+                foreach (var item in bookingList)
+                {
+                    recordCount++;
+                    output = output + Environment.NewLine + $"Record {recordCount} is for booking " +
+                        $"named {item.Booking_ID} created by {item.Created_By} for slot {item.Slot_Date} and time {item.Slot_time}" + Environment.NewLine; 
+                }
+                output = output + Environment.NewLine + $"Total records = {recordCount}" + Environment.NewLine;
+                tbxAnalysisOutput.Text = output;
+            }
+
+
+            //Display Access level list in Analyse table
+            if (analysisType == AnalysisType.Summary && tableSelected == DBTableSelected.AccessLevel)
+            {
+                foreach (var item in accesslevelList)
+                {
+                    recordCount++;
+                    output = output + Environment.NewLine + $"Record {recordCount} is for Level ID {item.Level_ID} " +
+                        $"which is Job Role {item.Job_Role}" + Environment.NewLine;
+                }
+                output = output + Environment.NewLine + $"Total Access level records = {recordCount}" + Environment.NewLine;
+                tbxAnalysisOutput.Text = output;
+            }
+
+        }
     }
 }
+
