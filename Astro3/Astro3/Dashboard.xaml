@@ -23,12 +23,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-            <TextBox Name="tbxSearchText" Height="26" Width="100" Margin="10,0" />
-            <Button Content="Search" Name="btnSearch" Height="26" Width="100" Margin="10,0" />
-            <Button Content="Reset" Name="btnReset" Height="26" Width="100" Margin="10,0" />
 
-        </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,5">
             <Button Content="Bookings" Name="btnBookings" Height="26" Width="100" Margin="10,0" Click="btnBookings_Click" VerticalAlignment="Top" Visibility="Collapsed"/>
