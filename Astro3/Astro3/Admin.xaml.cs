@@ -309,16 +309,33 @@ namespace Astro3
             //Display Users list in Analyse table
             if (analysisType == AnalysisType.Summary && tableSelected == DBTableSelected.Users)
             {
+                int level1CountSummary = 0;
+                int level2CountSummary = 0;
+
                 foreach (var item in userList)
                 {
                     recordCount++;
                     output = output + Environment.NewLine + $"Record {recordCount} is for user " +
                         $"named {item.Firstname} {item.Surname}" + Environment.NewLine;
-                    
+
+                    if(item.Level_ID == 1)
+                    {
+                        level1CountSummary++;
+                    }
+
+                    if (item.Level_ID == 2)
+                    {
+                        level2CountSummary++;
+                    }
+
                 }
-                output = output + Environment.NewLine + $"Total User records = {recordCount}" + Environment.NewLine;
+                output = output + Environment.NewLine + $"Total Users with level 1 access is {level1CountSummary}." + Environment.NewLine;
+                output = output + Environment.NewLine + $"Total Users with level 2 access is {level2CountSummary}." + Environment.NewLine;
+                output = output + Environment.NewLine + $"total number of records = {recordCount}";
                 tbxAnalysisOutput.Text = output;                               
             }
+
+
 
             //Display Bookings list in Analyse table
             if (analysisType == AnalysisType.Summary && tableSelected == DBTableSelected.Bookings)
