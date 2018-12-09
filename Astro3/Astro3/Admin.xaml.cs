@@ -87,7 +87,15 @@ namespace Astro3
                 userList.Add(userRecord);
             }
 
+            foreach (var bookingRecord in db.Bookings)
+            {
+                bookingList.Add(bookingRecord);
+            }
 
+            foreach (var accesslevelRecord in db.AccessLevels)
+            {
+                accesslevelList.Add(accesslevelRecord);
+            }
         }
 
 
@@ -308,7 +316,7 @@ namespace Astro3
                         $"named {item.Firstname} {item.Surname}" + Environment.NewLine;
                     
                 }
-                output = output + Environment.NewLine + $"Total records = {recordCount}" + Environment.NewLine;
+                output = output + Environment.NewLine + $"Total User records = {recordCount}" + Environment.NewLine;
                 tbxAnalysisOutput.Text = output;                               
             }
 
@@ -319,9 +327,9 @@ namespace Astro3
                 {
                     recordCount++;
                     output = output + Environment.NewLine + $"Record {recordCount} is for booking " +
-                        $"named {item.Booking_ID} created by {item.Created_By} for slot {item.Slot_Date} and time {item.Slot_time}" + Environment.NewLine; 
+                        $"ID {item.Booking_ID} created by {item.Created_By} for {item.Slot_Date}" + Environment.NewLine; 
                 }
-                output = output + Environment.NewLine + $"Total records = {recordCount}" + Environment.NewLine;
+                output = output + Environment.NewLine + $"Total Booking records = {recordCount}" + Environment.NewLine;
                 tbxAnalysisOutput.Text = output;
             }
 
@@ -333,7 +341,7 @@ namespace Astro3
                 {
                     recordCount++;
                     output = output + Environment.NewLine + $"Record {recordCount} is for Level ID {item.Level_ID} " +
-                        $"which is Job Role {item.Job_Role}" + Environment.NewLine;
+                        $"which is Job Role: {item.Job_Role}" + Environment.NewLine;
                 }
                 output = output + Environment.NewLine + $"Total Access level records = {recordCount}" + Environment.NewLine;
                 tbxAnalysisOutput.Text = output;
