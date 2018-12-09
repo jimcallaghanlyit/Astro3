@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="Register User" Height="450" Width="800">
     <Grid RenderTransformOrigin="0.427,0.494">
+        <Grid.Background>
+            <ImageBrush ImageSource="Images\background_image.jpg" Stretch="UniformToFill" Opacity=".10"/>
+        </Grid.Background>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20" />
             <ColumnDefinition Width="*" />

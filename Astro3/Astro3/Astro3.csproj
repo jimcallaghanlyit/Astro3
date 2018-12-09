@@ -70,6 +70,9 @@
     <Compile Include="Admin-Bookings.xaml.cs">
       <DependentUpon>Admin-Bookings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard-Datagrid.xaml.cs">
+      <DependentUpon>Dashboard-Datagrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RegisterUser.xaml.cs">
       <DependentUpon>RegisterUser.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Bookings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dashboard-Datagrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
