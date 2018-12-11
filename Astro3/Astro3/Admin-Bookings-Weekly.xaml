@@ -74,6 +74,7 @@
                     Margin="10,1" 
                     Click="btnClose_Click"/>
         </StackPanel>
+        
 
         <StackPanel Name="stkBookingSlotsWeekly" 
                     Grid.Row="1" 

@@ -20,7 +20,6 @@
           <Property Name="Creation_Date" Type="datetime" Nullable="false" />
           <Property Name="User_ID" Type="int" Nullable="false" />
           <Property Name="Last_Update_Date" Type="datetime" Nullable="false" />
-          <Property Name="Current_Status" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Updated_By" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Slot_Date" Type="datetime" Nullable="false" />
@@ -127,7 +126,6 @@
           <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="User_ID" Type="Int32" Nullable="false" />
           <Property Name="Last_Update_Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Current_Status" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Created_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Updated_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="AstroDBModel.FK_Booking_To_User" FromRole="Booking" ToRole="User" />
@@ -222,7 +220,6 @@
                 <ScalarProperty Name="Slot_Date" ColumnName="Slot_Date" />
                 <ScalarProperty Name="Updated_By" ColumnName="Updated_By" />
                 <ScalarProperty Name="Created_By" ColumnName="Created_By" />
-                <ScalarProperty Name="Current_Status" ColumnName="Current_Status" />
                 <ScalarProperty Name="Last_Update_Date" ColumnName="Last_Update_Date" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Creation_Date" ColumnName="Creation_Date" />

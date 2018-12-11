@@ -13,31 +13,29 @@
             <ImageBrush ImageSource="Images\background_image.jpg" Stretch="UniformToFill" Opacity=".10"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*" />
-            <ColumnDefinition Width="50*" />
+            <ColumnDefinition Width="20*" />
+
             <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+
         </Grid.RowDefinitions>
 
         <Calendar Height="170" 
-                  Grid.Column="2"
-                  HorizontalAlignment="Left" 
-                  Margin="60,50,0,0" 
+                  Grid.Column="1" 
+                  Margin="24,65,0,0" 
                   Name="calCalendar" 
-                  VerticalAlignment="Top" 
-                  Width="180"
-                  SelectedDatesChanged="calCalendar_SelectedDatesChanged"
+                  VerticalAlignment="Top"
+                  SelectedDatesChanged="calCalendar_SelectedDatesChanged" HorizontalAlignment="Left" Width="180"
                   />
 
-        <StackPanel Grid.Row="2" 
-                    Grid.Column="2" 
+
+        <StackPanel Grid.Row="0" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Left"
-                    Margin="10,150,0,20">
+                    Margin="24,255,0,40" Grid.Column="1">
             <Button Content="Confirm" 
                     Name="btnConfirm" 
                     Width="100" 
@@ -50,6 +48,7 @@
                     Height="26" 
                     Margin="10,1" 
                     Click="btnCancel_Click"/>
+
         </StackPanel>
 
 
@@ -57,40 +56,70 @@
                     Grid.Column="0"
                     HorizontalAlignment="Center"
                     Margin="10,150,0,20">
-            <Button Content="Recurrence" 
-                    Name="btnRecurrence" 
-                    Height="26" 
-                    Width="100" 
-                    Margin="0,20" 
-                    ToolTip="You must submit a Standing order form for recurring bookings"
-                    Click="btnRecurrence_Click" />
+
         </StackPanel>
 
-        
 
-        <StackPanel Name="stkBookingDetails" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Visibility="Visible">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30*"/>
-                    <ColumnDefinition Width="70*"/>
-                </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="16*"/>
-                    <RowDefinition Height="16*"/>
-                </Grid.RowDefinitions>
+        <StackPanel Name="stkBookingDetails" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Visibility="Visible" Margin="10,40,39,100">
+            <Label Grid.Row="1" Grid.Column="2" Content="Available slots"/>
+            <ComboBox Name="cboAvailableSlots" Width="150">
 
-                <Label Grid.Row="1" Grid.Column="2" Content="Available slots"/>
-                <ComboBox Name="cboAvailableSlots" Grid.Row="4" Grid.Column="1" Width="150">
+            </ComboBox>
+         
+
+            <CheckBox x:Name="Recurrence"
+                      Content="Recurrence"
+                      
+                      Margin="5" Checked="Recurrence_Checked" Unchecked="Recurrence_Unchecked"/>
+        </StackPanel>
+
+        <StackPanel Visibility="Hidden"
+                    x:Name="frequencyPanel"
+                    HorizontalAlignment="Left"
+                    Margin="20,130,0,0" Height="100" VerticalAlignment="Top">
+            <TextBlock Text="Frequency" 
+                       FontWeight="Bold"
+                       Margin="5"/>
+            <RadioButton x:Name="Daily" 
+                         Margin="5" 
+                         GroupName="Frequency"
+                         Content="Daily"/>
+            <RadioButton x:Name="Weekly" 
+                         Margin="5" 
+                         GroupName="Frequency"
+                         Content="Weekly"/>
+        </StackPanel>
+
+
+        <StackPanel Visibility="Hidden"
+                    x:Name="daysPanel"
+                    HorizontalAlignment="Left"
+                    Margin="20,250,0,173">
+            <Label FontWeight="Bold" 
+                   Content="Recur every week(s) on:" />
+
+            <CheckBox x:Name="Monday"
+                      Content="Monday"
+                     
                    
-                </ComboBox>
-            </Grid>
+                      Margin="5"/>
+            <CheckBox x:Name="Tuesday"
+                      Content="Tuesday"
+                      
+                      Margin="5"/>
+            <CheckBox x:Name="Wednesday"
+                      Content="Wednesday"
+                      
+                      Margin="5"/>
+            <CheckBox x:Name="Thursday"
+                      Content="Thursday"
+                     
+                      Margin="5"/>
+            <CheckBox x:Name="Friday"
+                      Content="Friday"
+                     
+                      Margin="5"/>
         </StackPanel>
-
-      
     </Grid>
 </Page>

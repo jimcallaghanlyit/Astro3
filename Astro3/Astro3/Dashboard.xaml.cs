@@ -23,7 +23,7 @@ namespace Astro3
 
         public User user = new User();
         public Dashboard()
-        {
+        {           
             InitializeComponent();
         }
 
@@ -42,6 +42,7 @@ namespace Astro3
         private void btnBookings_Click(object sender, RoutedEventArgs e)
         {
             Bookings bookings = new Bookings();
+            bookings.user = user;
             frmMain.Navigate(bookings);
         }
 
@@ -57,6 +58,11 @@ namespace Astro3
                 btnAdmin.Visibility = Visibility.Visible;
                 btnBookings.Visibility = Visibility.Visible;
             }
+        }
+
+        private void MyBookingView()
+        {
+           
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

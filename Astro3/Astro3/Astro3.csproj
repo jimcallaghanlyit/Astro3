@@ -70,14 +70,11 @@
     <Compile Include="Admin-Bookings.xaml.cs">
       <DependentUpon>Admin-Bookings.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard-Datagrid.xaml.cs">
-      <DependentUpon>Dashboard-Datagrid.xaml</DependentUpon>
+    <Compile Include="MyBookings.xaml.cs">
+      <DependentUpon>MyBookings.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterUser.xaml.cs">
       <DependentUpon>RegisterUser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="User-Bookings2.xaml.cs">
-      <DependentUpon>User-Bookings2.xaml</DependentUpon>
     </Compile>
     <Page Include="Admin-Bookings-Weekly.xaml">
       <SubType>Designer</SubType>
@@ -92,10 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Bookings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dashboard-Datagrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,11 +117,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RegisterUser.xaml">
+    <Page Include="MyBookings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User-Bookings2.xaml">
+    <Page Include="RegisterUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

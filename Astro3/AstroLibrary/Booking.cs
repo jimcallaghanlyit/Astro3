@@ -18,7 +18,6 @@ namespace AstroLibrary
         public System.DateTime Creation_Date { get; set; }
         public int User_ID { get; set; }
         public System.DateTime Last_Update_Date { get; set; }
-        public string Current_Status { get; set; }
         public string Created_By { get; set; }
         public string Updated_By { get; set; }
         public System.DateTime Slot_Date { get; set; }

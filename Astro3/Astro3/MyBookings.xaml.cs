@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Astro3
 {
     /// <summary>
-    /// Interaction logic for Dashboard_Datagrid.xaml
+    /// Interaction logic for Page1.xaml
     /// </summary>
-    public partial class Dashboard_Datagrid : Window
+    public partial class Page1 : Page
     {
-        public Dashboard_Datagrid()
+        public Page1()
         {
             InitializeComponent();
         }

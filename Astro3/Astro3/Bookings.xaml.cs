@@ -23,11 +23,31 @@ namespace Astro3
     {
         AstroDBEntities db = new AstroDBEntities();
         Booking newbooking = new Booking();
+        public User user = new User();
         public Bookings()
         {
             
             InitializeComponent();
             populateAvilableSlots(calCalendar.DisplayDate);
+        }
+        int frequency = 0;// 0 is no reapt 
+        public int Frequency
+        {
+            get
+            {
+                return frequency;
+            }
+        }
+
+
+        List<int> days = new List<int>();
+
+        public List<int> Days
+        {
+            get
+            {
+                return days;
+            }
         }
 
         private void btnBook_Click(object sender, RoutedEventArgs e)
@@ -41,27 +61,8 @@ namespace Astro3
 
         }
 
-        private void btnRecurrence_Click(object sender, RoutedEventArgs e)
-        {
-            User_Bookings2 bookings2 = new User_Bookings2();
-            bookings2.ShowDialog();
+        
 
-            newbooking.Frequency = bookings2.Frequency;
-            
-               //todo to add a string holding the days numbers
-            for(int i = 0; i < bookings2.Days.Count(); i++)
-            {
-                if(!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) //(newbooking.days.Length > 0)
-                    newbooking.days +=",";
-                newbooking.days +=  bookings2.Days[i].ToString();                             
-            }           
-
-        }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
 
 
         /// <summary>
@@ -75,7 +76,7 @@ namespace Astro3
             // Query DB for Bookings 
             List<int> slots = new List<int> { 5, 6, 7, 8, 9, 10, 11 };
 
-            //populate a list with all slot times 
+            //populate a list with all available slot times 
             if (query.Count()> 0)
             {
                 foreach (var line in query)
@@ -102,12 +103,85 @@ namespace Astro3
 
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            newbooking.User_ID= user.User_ID;
+            newbooking.Updated_By = newbooking.Created_By = user.Username;
+            newbooking.Slot_Date = calCalendar.DisplayDate;
+            newbooking.Creation_Date = newbooking.Last_Update_Date = DateTime.Today;
+            
+            string digits = new String(cboAvailableSlots.SelectedItem.ToString().TakeWhile(Char.IsDigit).ToArray());
+            newbooking.Slot_time = Int32.Parse(digits);
+
+            if (Recurrence.IsChecked == true)
+            {
+                if (Weekly.IsChecked == true)
+                {
+                    newbooking.Frequency = 2;
+                }
+                else
+                {
+                    newbooking.Frequency = 1;
+                }
+
+                if (Monday.IsChecked == true)
+                {
+                    days.Add(1);
+                }
+                if (Tuesday.IsChecked == true)
+                {
+                    days.Add(2);
+                }
+                if (Wednesday.IsChecked == true)
+                {
+                    days.Add(3);
+                }
+                if (Thursday.IsChecked == true)
+                {
+                    days.Add(4);
+                }
+                if (Friday.IsChecked == true)
+                {
+                    days.Add(5);
+                }
+
+                for (int i = 0; i < days.Count(); i++)
+                {
+                    if (!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) //(newbooking.days.Length > 0)
+                        newbooking.days += ",";
+                    newbooking.days += days[i].ToString();
+                }
+            }
+            else
+            {
+                newbooking.Frequency = 0;
+            }
+
+            db.Bookings.Add(newbooking);
+            db.SaveChanges();
 
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Recurrence_Checked(object sender, RoutedEventArgs e)
+        {
+            //User_Bookings2 bookings2 = new User_Bookings2();
+            //bookings2.ShowDialog();
+
+            //newbooking.Frequency = bookings2.Frequency;
+
+            //add a string to hold the days numbers
+            frequencyPanel.Visibility = Visibility.Visible;
+            daysPanel.Visibility = Visibility.Visible;
+
+        }
+
+        private void Recurrence_Unchecked(object sender, RoutedEventArgs e)
+        {
+            frequencyPanel.Visibility = Visibility.Hidden;
+            daysPanel.Visibility = Visibility.Hidden;
         }
     }
 }
