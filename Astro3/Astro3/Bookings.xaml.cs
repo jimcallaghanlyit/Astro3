@@ -50,18 +50,7 @@ namespace Astro3
             }
         }
 
-        private void btnBook_Click(object sender, RoutedEventArgs e)
-        {
-
-
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        
+       
 
 
 
@@ -148,6 +137,7 @@ namespace Astro3
                     if (!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) //(newbooking.days.Length > 0)
                         newbooking.days += ",";
                     newbooking.days += days[i].ToString();
+                    
                 }
             }
             else
@@ -156,7 +146,13 @@ namespace Astro3
             }
 
             db.Bookings.Add(newbooking);
-            db.SaveChanges();
+            int saveSuccess = db.SaveChanges();
+            if (saveSuccess == 1)
+            {
+                MessageBox.Show("Booking saved successfully.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            
 
         }
 
@@ -167,11 +163,6 @@ namespace Astro3
 
         private void Recurrence_Checked(object sender, RoutedEventArgs e)
         {
-            //User_Bookings2 bookings2 = new User_Bookings2();
-            //bookings2.ShowDialog();
-
-            //newbooking.Frequency = bookings2.Frequency;
-
             //add a string to hold the days numbers
             frequencyPanel.Visibility = Visibility.Visible;
             daysPanel.Visibility = Visibility.Visible;

@@ -26,27 +26,77 @@ namespace Astro3
     {
         AstroDBEntities db = new AstroDBEntities();
         List<Booking> bookingList = new List<Booking>();
+        //List<Booking> bookingSlot = new List<Booking>();
+        Booking selectedSlot = new Booking();
         public User user = new User();
+        public Booking booking = new Booking();
+
+        
+
         public MyBookings()
         {
             InitializeComponent();
         }
 
+
+
+
         private void populateList()
         {
             foreach (var bookingRecord in db.Bookings.Where(u => u.User_ID == user.User_ID))
             {
-
-                bookingList.Add(bookingRecord);
-               
+                bookingList.Add(bookingRecord);       
             }
-
-            lstUserList.ItemsSource = bookingList;
-            lstUserList.Items.Refresh();
+            lstBookingList.ItemsSource = bookingList;
+            lstBookingList.Items.Refresh();
         }
+
+
+
+        // Refresh User list in database
+        private void RefreshBookingList()
+        {
+            lstBookingList.ItemsSource = bookingList;
+            lstBookingList.Items.Refresh();
+        }
+
+
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             populateList();
         }
+
+
+
+        private void submenuDeleteBooking_Click(object sender, RoutedEventArgs e)
+        {
+            
+            db.Bookings.RemoveRange(db.Bookings.Where(u => u.User_ID == user.User_ID));
+            int saveSuccess = db.SaveChanges();
+            if (saveSuccess == 1)
+            {
+                MessageBox.Show("Booking slot deleted successfully.", "Save to database", MessageBoxButton.OK, MessageBoxImage.Information);
+                RefreshBookingList();
+            }
+            else
+            {
+                MessageBox.Show("Problem deleting booking slot.", "Delete from database", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+
+        private void lstBookingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lstBookingList.SelectedIndex > 0)
+            {
+                submenuDeleteBooking.IsEnabled = true;             
+            }
+        }
+
+
+
+
+
     }
 }
