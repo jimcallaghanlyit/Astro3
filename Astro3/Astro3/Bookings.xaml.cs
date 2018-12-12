@@ -24,12 +24,22 @@ namespace Astro3
         AstroDBEntities db = new AstroDBEntities();
         Booking newbooking = new Booking();
         public User user = new User();
+
+        
+        //Enable 'Back' button to return to previous page
+        private MyBookings mybookings;
+
+
+
         public Bookings()
         {
-            
             InitializeComponent();
             populateAvilableSlots(calCalendar.DisplayDate);
+            
         }
+
+
+
         int frequency = 0;// 0 is no reapt 
         public int Frequency
         {
@@ -173,6 +183,12 @@ namespace Astro3
         {
             frequencyPanel.Visibility = Visibility.Hidden;
             daysPanel.Visibility = Visibility.Hidden;
+        }
+
+        //Enable 'Back' button to return to previous page
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(mybookings);
         }
     }
 }
