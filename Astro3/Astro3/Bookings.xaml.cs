@@ -25,10 +25,6 @@ namespace Astro3
         Booking newbooking = new Booking();
         public User user = new User();
 
-        
-        //Enable 'Back' button to return to previous page
-        private MyBookings mybookings;
-
 
 
         public Bookings()
@@ -168,7 +164,7 @@ namespace Astro3
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void Recurrence_Checked(object sender, RoutedEventArgs e)
@@ -185,10 +181,8 @@ namespace Astro3
             daysPanel.Visibility = Visibility.Hidden;
         }
 
-        //Enable 'Back' button to return to previous page
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(mybookings);
-        }
+
+
+
     }
 }

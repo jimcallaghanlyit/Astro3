@@ -121,6 +121,5 @@
                      
                       Margin="5"/>
         </StackPanel>
-        <Button Content="Back" HorizontalAlignment="Left" Margin="25,384,0,0" VerticalAlignment="Top" Width="100" Height="26" Click="Button_Click"/>
     </Grid>
 </Page>

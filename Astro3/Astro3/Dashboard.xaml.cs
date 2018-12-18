@@ -72,5 +72,13 @@ namespace Astro3
             CheckUserAccess(user);
             MyBookingView();
         }
+
+
+        private void btnMyBookings_Click(object sender, RoutedEventArgs e)
+        {
+            MyBookings bookingview = new MyBookings();
+            bookingview.user = user;
+            frmMain.Navigate(bookingview);
+        }
     }
 }
