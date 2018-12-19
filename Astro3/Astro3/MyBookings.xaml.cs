@@ -31,6 +31,7 @@ namespace Astro3
         public User user = new User();
         public Booking booking = new Booking();
 
+
         
 
         public MyBookings()
@@ -71,9 +72,10 @@ namespace Astro3
 
         private void submenuDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
+
             
-            //db.Bookings.RemoveRange(db.Bookings.Where(u => u.User_ID == user.User_ID));
-            db.Bookings.RemoveRange(db.Bookings.Where(b => b.Booking_ID == selectedSlot.Booking_ID));
+            db.Bookings.RemoveRange(db.Bookings.Where(b=>b.Booking_ID == selectedSlot.Booking_ID));
+
             int saveSuccess = db.SaveChanges();
             if (saveSuccess == 1)
             {
