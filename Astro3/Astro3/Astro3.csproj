@@ -64,26 +64,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Admin-Bookings-Weekly.xaml.cs">
-      <DependentUpon>Admin-Bookings-Weekly.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Admin-Bookings.xaml.cs">
-      <DependentUpon>Admin-Bookings.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MyBookings.xaml.cs">
       <DependentUpon>MyBookings.xaml</DependentUpon>
     </Compile>
     <Compile Include="RegisterUser.xaml.cs">
       <DependentUpon>RegisterUser.xaml</DependentUpon>
     </Compile>
-    <Page Include="Admin-Bookings-Weekly.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Admin-Bookings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Admin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

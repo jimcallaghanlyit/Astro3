@@ -344,7 +344,7 @@ namespace Astro3
                 {
                     recordCount++;
                     output = output + Environment.NewLine + $"Record {recordCount} is for booking " +
-                        $"ID {item.Booking_ID} created by {item.Created_By} for {item.Slot_Date}" + Environment.NewLine; 
+                        $"ID {item.Booking_ID} created by {item.Created_By} for {item.Slot_Date} {item.Slot_time}" + Environment.NewLine; 
                 }
                 output = output + Environment.NewLine + $"Total Booking records = {recordCount}" + Environment.NewLine;
                 tbxAnalysisOutput.Text = output;
