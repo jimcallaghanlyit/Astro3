@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AstroLibrary;
+
 
 namespace Astro3
 {
@@ -25,8 +26,9 @@ namespace Astro3
     public partial class MyBookings : Page
     {
         AstroDBEntities db = new AstroDBEntities();
+
         List<Booking> bookingList = new List<Booking>();
-        //List<Booking> bookingSlot = new List<Booking>();
+
         Booking selectedSlot = new Booking();
         public User user = new User();
         public Booking booking = new Booking();
@@ -39,11 +41,11 @@ namespace Astro3
             InitializeComponent();
         }
 
-
-
+               
 
         private void populateList()
         {
+            bookingList.Clear();
             foreach (var bookingRecord in db.Bookings.Where(u => u.User_ID == user.User_ID))
             {
                 bookingList.Add(bookingRecord);       
@@ -72,28 +74,35 @@ namespace Astro3
 
         private void submenuDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                db.Bookings.RemoveRange(db.Bookings.Where(b => b.Booking_ID == selectedSlot.Booking_ID));
+                int saveSuccess = db.SaveChanges();
+                if (saveSuccess == 1)
+                {
+                    MessageBox.Show("Booking slot deleted successfully.", "Save to database", MessageBoxButton.OK, MessageBoxImage.Information);
+                    populateList();
+                }
+                else
+                {
+                    MessageBox.Show("Problem deleting booking slot.", "Delete from database", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
 
+                MessageBox.Show(ex.InnerException.ToString());
+            }
             
-            db.Bookings.RemoveRange(db.Bookings.Where(b=>b.Booking_ID == selectedSlot.Booking_ID));
-
-            int saveSuccess = db.SaveChanges();
-            if (saveSuccess == 1)
-            {
-                MessageBox.Show("Booking slot deleted successfully.", "Save to database", MessageBoxButton.OK, MessageBoxImage.Information);
-                RefreshBookingList();
-            }
-            else
-            {
-                MessageBox.Show("Problem deleting booking slot.", "Delete from database", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
         }
 
 
         private void lstBookingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (lstBookingList.SelectedIndex > 0)
+            if (lstBookingList.SelectedIndex > -1)
             {
-                submenuDeleteBooking.IsEnabled = true;             
+                submenuDeleteBooking.IsEnabled = true;
+                selectedSlot = bookingList.ElementAt(lstBookingList.SelectedIndex);
             }
         }
 
