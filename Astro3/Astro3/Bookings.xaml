@@ -14,28 +14,30 @@
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*" />
-
             <ColumnDefinition Width="50*" />
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-
         </Grid.RowDefinitions>
 
+        <!--Add Calendar-->
         <Calendar Height="170" 
                   Grid.Column="1" 
                   Margin="24,65,0,0" 
                   Name="calCalendar" 
                   VerticalAlignment="Top"
-                  SelectedDatesChanged="calCalendar_SelectedDatesChanged" HorizontalAlignment="Left" Width="180"
-                  />
+                  SelectedDatesChanged="calCalendar_SelectedDatesChanged" 
+                  HorizontalAlignment="Left" 
+                  Width="180"/>
 
-
+        
+        <!--Stackpanel for Buttons-->
         <StackPanel Grid.Row="0" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Left"
-                    Margin="24,255,0,40" Grid.Column="1">
+                    Margin="24,255,0,40" 
+                    Grid.Column="1">
             <Button Content="Confirm" 
                     Name="btnConfirm" 
                     Width="100" 
@@ -48,77 +50,73 @@
                     Height="26" 
                     Margin="10,1" 
                     Click="btnCancel_Click"/>
-
         </StackPanel>
 
+        
+        <!--Stackpanel for Available Slots-->
+        <StackPanel Name="stkBookingDetails" 
+                    Grid.Column="0" 
+                    Grid.Row="0" 
+                    HorizontalAlignment="Center" 
+                    Visibility="Visible" 
+                    Margin="10,40,39,100">
 
-        <StackPanel Grid.Row="1" 
-                    Grid.Column="0"
-                    HorizontalAlignment="Center"
-                    Margin="10,150,0,20">
-
-        </StackPanel>
-
-
-
-        <StackPanel Name="stkBookingDetails" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Visibility="Visible" Margin="10,40,39,100">
-            <Label Grid.Row="1" Grid.Column="2" Content="Available slots"/>
-            <ComboBox Name="cboAvailableSlots" Width="150">
-
+            <Label Grid.Row="1" 
+                   Grid.Column="2" 
+                   Content="Available slots"/>
+            <ComboBox 
+                   Name="cboAvailableSlots" Width="150">
             </ComboBox>
-
-
             <CheckBox x:Name="Recurrence"
-                      Content="Recurrence"
-                      
-                      Margin="5" Checked="Recurrence_Checked" Unchecked="Recurrence_Unchecked"/>
+                      Content="Recurrence"                  
+                      Margin="5" 
+                      Checked="Recurrence_Checked" 
+                      Unchecked="Recurrence_Unchecked"/>
         </StackPanel>
+        
 
+        <!--Stackpanel for Frequency selections-->
         <StackPanel Visibility="Hidden"
                     x:Name="frequencyPanel"
-                    HorizontalAlignment="Left"
-                    Margin="20,130,0,0" Height="100" VerticalAlignment="Top">
+                    HorizontalAlignment="Center"
+                    Margin="-50,130,0,0" 
+                    Height="100" 
+                    VerticalAlignment="Top">
             <TextBlock Text="Frequency" 
                        FontWeight="Bold"
                        Margin="5"/>
             <RadioButton x:Name="Daily" 
-                         Margin="5" 
-                         GroupName="Frequency"
-                         Content="Daily"/>
+                        Margin="5" 
+                        GroupName="Frequency"
+                        Content="Daily"/>
             <RadioButton x:Name="Weekly" 
-                         Margin="5" 
-                         GroupName="Frequency"
-                         Content="Weekly"/>
+                        Margin="5" 
+                        GroupName="Frequency"
+                        Content="Weekly"/>
         </StackPanel>
 
 
+        <!--Stackpanel for Daily selections-->
         <StackPanel Visibility="Hidden"
                     x:Name="daysPanel"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     Margin="20,250,0,173">
             <Label FontWeight="Bold" 
                    Content="Recur every week(s) on:" />
-
             <CheckBox x:Name="Monday"
-                      Content="Monday"
-                     
-                   
+                      Content="Monday"                   
                       Margin="5"/>
             <CheckBox x:Name="Tuesday"
                       Content="Tuesday"
-                      
                       Margin="5"/>
             <CheckBox x:Name="Wednesday"
                       Content="Wednesday"
-                      
                       Margin="5"/>
             <CheckBox x:Name="Thursday"
                       Content="Thursday"
-                     
                       Margin="5"/>
             <CheckBox x:Name="Friday"
                       Content="Friday"
-                     
                       Margin="5"/>
         </StackPanel>
     </Grid>

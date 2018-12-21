@@ -42,7 +42,7 @@ namespace Astro3
         }
 
                
-
+        //Populate the list with the Bookings against this User id
         private void populateList()
         {
             bookingList.Clear();
@@ -56,14 +56,6 @@ namespace Astro3
 
 
 
-        // Refresh User list in database
-        private void RefreshBookingList()
-        {
-            lstBookingList.ItemsSource = bookingList;
-            lstBookingList.Items.Refresh();
-        }
-
-
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -71,7 +63,7 @@ namespace Astro3
         }
 
 
-
+        //Allows the User to delete his/her bookings under her Account
         private void submenuDeleteBooking_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -90,13 +82,13 @@ namespace Astro3
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.InnerException.ToString());
             }
             
         }
 
 
+        //Connects to Listview & displays booking slots if value greater than "-1"
         private void lstBookingList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstBookingList.SelectedIndex > -1)
@@ -105,8 +97,6 @@ namespace Astro3
                 selectedSlot = bookingList.ElementAt(lstBookingList.SelectedIndex);
             }
         }
-
-
 
 
 

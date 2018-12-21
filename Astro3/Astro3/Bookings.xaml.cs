@@ -31,12 +31,14 @@ namespace Astro3
         {
             InitializeComponent();
             populateAvilableSlots(calCalendar.DisplayDate);
-            
         }
 
 
 
-        int frequency = 0;// 0 is no reapt 
+        /// <summary>
+        /// Determine if Frequency is Daily or Weekly
+        /// </summary>
+        int frequency = 0;
         public int Frequency
         {
             get
@@ -46,8 +48,10 @@ namespace Astro3
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         List<int> days = new List<int>();
-
         public List<int> Days
         {
             get
@@ -58,44 +62,60 @@ namespace Astro3
 
        
 
-
-
         /// <summary>
         /// Populates slots available for selection based on date selected
         /// </summary>
-        /// <param name="selectedDate"></param>
+        /// <param name="selectedDate">
+        /// Takes the value from selected date
+        /// </param>
         private void populateAvilableSlots(DateTime selectedDate)
         {
-            cboAvailableSlots.Items.Clear();
-            var query = db.Bookings.Where(row => row.Slot_Date == selectedDate);
-            // Query DB for Bookings 
-            List<int> slots = new List<int> { 5, 6, 7, 8, 9, 10, 11 };
-
-            //populate a list with all available slot times 
-            if (query.Count()> 0)
+            try
             {
-                foreach (var line in query)
+                cboAvailableSlots.Items.Clear();
+                var query = db.Bookings.Where(row => row.Slot_Date == selectedDate);
+                // Query DB for Bookings 
+                List<int> slots = new List<int> { 5, 6, 7, 8, 9, 10, 11 };
+
+                //populate a list with all available slot times 
+                if (query.Count() > 0)
                 {
-                    slots.Remove(line.Slot_time);
+                    foreach (var line in query)
+                    {
+                        slots.Remove(line.Slot_time);
+                    }
+                }
+
+                foreach (var item in slots)
+                {
+                    cboAvailableSlots.Items.Add("" + item.ToString() + ":00 PM - " + (item + 1).ToString() + ":00 PM");
                 }
             }
-
-            foreach (var item in slots)
+            catch (Exception ex)
             {
-                cboAvailableSlots.Items.Add(""+item.ToString()+ ":00 PM - " + (item+1).ToString() + ":00 PM");
+                MessageBox.Show(ex.InnerException.ToString());
             }
-            
-
-
-
-
         }
 
+
+
+        /// <summary>
+        /// Mathod which accepts the Calendar selected date value
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void calCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             populateAvilableSlots(calCalendar.SelectedDate.Value);
         }
 
+
+
+        /// <summary>
+        /// Method which confirms the booking based on selected date, time & frequency
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
             newbooking.User_ID= user.User_ID;
@@ -143,7 +163,6 @@ namespace Astro3
                     if (!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) //(newbooking.days.Length > 0)
                         newbooking.days += ",";
                     newbooking.days += days[i].ToString();
-                    
                 }
             }
             else
@@ -157,32 +176,60 @@ namespace Astro3
             {
                 MessageBox.Show("Booking saved successfully.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-
-            
-
         }
 
+
+
+        /// <summary>
+        /// Return to previous screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            
+            NavigationService.GoBack();
         }
 
+
+
+        /// <summary>
+        /// Displays Frequency panel if checkbox selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Recurrence_Checked(object sender, RoutedEventArgs e)
         {
-            //add a string to hold the days numbers
-            frequencyPanel.Visibility = Visibility.Visible;
-            daysPanel.Visibility = Visibility.Visible;
+            try
+            {
+                //add a string to hold the days numbers
+                frequencyPanel.Visibility = Visibility.Visible;
+                daysPanel.Visibility = Visibility.Visible;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString());
+            }
 
         }
 
+
+        /// <summary>
+        /// Removes Frequency panel if checkbox selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Recurrence_Unchecked(object sender, RoutedEventArgs e)
         {
-            frequencyPanel.Visibility = Visibility.Hidden;
-            daysPanel.Visibility = Visibility.Hidden;
+            try
+            {
+                frequencyPanel.Visibility = Visibility.Hidden;
+                daysPanel.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.InnerException.ToString());
+            }
+
         }
-
-
-
-
     }
 }

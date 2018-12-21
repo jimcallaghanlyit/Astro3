@@ -30,25 +30,34 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-
+        <!--Row 1-->
         <Label Content="Username" Grid.Column="1" HorizontalAlignment="Left" Margin="66,10,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <Label Content="Password" Grid.Column="1" HorizontalAlignment="Left" Margin="66,28,0,0" Grid.Row="2" VerticalAlignment="Top"/>
-        <Label Content="Surname" Grid.Column="1" HorizontalAlignment="Left" Margin="66,23,0,0" Grid.Row="3" VerticalAlignment="Top" Width="83"/>
-        <Label Content="Firstname" Grid.Column="1" HorizontalAlignment="Left" Margin="66,22,0,0" Grid.Row="4" VerticalAlignment="Top"/>
-        <Label Content="Club" Grid.Column="1" HorizontalAlignment="Left" Margin="66,10,0,0" Grid.Row="5" VerticalAlignment="Top"/>
-        <Label Content="Email" Grid.Column="1" HorizontalAlignment="Left" Margin="66,15,0,0" Grid.Row="6" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxUsername" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="184,19,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2" AutomationProperties.IsRequiredForForm="True"/>
+
+        <!--Row 2-->
+        <Label Content="Password" Grid.Column="1" HorizontalAlignment="Left" Margin="66,28,0,0" Grid.Row="2" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxPassword" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="184,21,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2"  AutomationProperties.IsRequiredForForm="True"/>
+
+        <!--Row 3-->
+        <Label Content="Surname" Grid.Column="1" HorizontalAlignment="Left" Margin="66,23,0,0" Grid.Row="3" VerticalAlignment="Top" Width="83"/>
         <TextBox x:Name="tbxSurname" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="184,23,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2" AutomationProperties.IsRequiredForForm="True"/>
+
+        <!--Row 4-->
+        <Label Content="Firstname" Grid.Column="1" HorizontalAlignment="Left" Margin="66,22,0,0" Grid.Row="4" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxFirstname" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="184,22,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2" AutomationProperties.IsRequiredForForm="True"/>
+
+        <!--Row 5-->
+        <Label Content="Club" Grid.Column="1" HorizontalAlignment="Left" Margin="66,10,0,0" Grid.Row="5" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxClub" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="184,22,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2" AutomationProperties.IsRequiredForForm="True"/>
+
+        <!--Row 6-->
+        <Label Content="Email" Grid.Column="1" HorizontalAlignment="Left" Margin="66,15,0,0" Grid.Row="6" VerticalAlignment="Top"/>
         <TextBox x:Name="tbxEmail" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="184,19,0,0" Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2" AutomationProperties.IsRequiredForForm="True"/>
 
-
+        <!--Row 7-->
         <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="OK" Name="btnOK" Width="100" Height="26" Margin="10,1" Click="btnOK_Click"/>
             <Button Content="Cancel" Name="btnCancel" Width="100" Height="26" Margin="10,1" Click="btnCancel_Click" />
         </StackPanel>
-
     </Grid>
 </Window>

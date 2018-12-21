@@ -30,6 +30,11 @@ namespace Astro3
         }
 
 
+        /// <summary>
+        /// Registers User once details added correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             User newuser = new User();
@@ -60,10 +65,7 @@ namespace Astro3
                 newuser.Email = tbxEmail.Text;
             }
 
-
-
-          
-
+            // Add User to database and show Message box showing success/failure
             try
             {
                 db.Users.Add(newuser);
@@ -75,15 +77,13 @@ namespace Astro3
             {
                 MessageBox.Show("Try again.", "Error Creating User", MessageBoxButton.OK, MessageBoxImage.Information);
             }  
-
-
-            
         }
+
+
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-            Environment.Exit(0);
         }
     }
 }

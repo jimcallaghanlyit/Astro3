@@ -18,6 +18,7 @@
                 <RowDefinition Height="50*"/>
             </Grid.RowDefinitions>
 
+            <!--Row 0 - Listview-->
             <ListView Name="lstBookingList" Grid.Row="0" Grid.ColumnSpan="2" SelectionChanged="lstBookingList_SelectionChanged" >
                 <ListView.View>
                     <GridView>
@@ -67,12 +68,11 @@
                                     <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap" Text="{Binding Updated_By}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
-                        </GridViewColumn>                     
-
+                        </GridViewColumn>
                     </GridView>
-
                 </ListView.View>
 
+                <!--Context Menu for deleting bookings-->
                 <ListView.ContextMenu>
                     <ContextMenu Name="mnuUserListOverview" IsEnabled="True">
                         <ContextMenu.Items>

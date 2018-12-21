@@ -40,40 +40,44 @@ namespace Astro3
         /// <param name="e"></param>
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
-
-            //int loginCounter = 0;
             User validatedUser = new User();
-            //bool login = false;
-            bool credentialsValidated = false;
-            string currentUser = tbxUsername.Text;
-            string currentPassword = tbxPassword.Password;
-            credentialsValidated = ValidateUserInput(currentUser, currentPassword);
-            if (credentialsValidated)
+            try
             {
-                validatedUser = GetUserRecord(currentUser, currentPassword);
-                if (validatedUser.User_ID > 0)
+                bool credentialsValidated = false;
+                string currentUser = tbxUsername.Text;
+                string currentPassword = tbxPassword.Password;
+                credentialsValidated = ValidateUserInput(currentUser, currentPassword);
+                if (credentialsValidated)
                 {
-                    CreateLogEntry("Login", "User logged in successfully.", validatedUser.User_ID, validatedUser.Username);
-                    Dashboard dashboard = new Dashboard();
-                    dashboard.user = validatedUser;
-                    //dashboard.Owner = this;
-                    this.Close();
-                    dashboard.ShowDialog();
-                    //this.Hide();
+                    validatedUser = GetUserRecord(currentUser, currentPassword);
+                    if (validatedUser.User_ID > 0)
+                    {
+                        CreateLogEntry("Login", "User logged in successfully.", validatedUser.User_ID, validatedUser.Username);
+                        Dashboard dashboard = new Dashboard();
+                        dashboard.user = validatedUser;
+                        this.Close();
+                        dashboard.ShowDialog();
+                    }
+                    else
+                    {
+                        CreateLogEntry("Login", "The credentials entered do not exist in the database", 0, currentUser);
+                        MessageBox.Show("The credentials you entered do not exist in the database.  Please check and try again", "User login", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
-               else
+                else
                 {
-                    CreateLogEntry("Login", "The credentials entered do not exist in the database", 0, currentUser);
-                    MessageBox.Show("The credentials you entered do not exist in the database.  Please check and try again", "User login", MessageBoxButton.OK, MessageBoxImage.Error);
+                    CreateLogEntry("Login", "User failed to log in successfully.", 0, currentUser);
+                    MessageBox.Show("Error with your username or password.  Please check and try again.", "User login", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                CreateLogEntry("Login", "User failed to log in successfully.", 0, currentUser);
-                MessageBox.Show("Error with your username or password.  Please check and try again.", "User login", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.InnerException.ToString());
             }
-                        
+            
         }
+
+
 
         /// <summary>
         /// Validates the user credentials against those in the SQL database.
@@ -89,9 +93,6 @@ namespace Astro3
         /// </returns>
         private bool ValidateUserInput(string username, string password)
         {
-            // It is easier to set valdated to false
-            // inside ne of the checks than it is
-            // to validate each check
             bool validated = true;
             // Check username length & ensure not more 
             // or less than specfified in DB table
@@ -116,6 +117,7 @@ namespace Astro3
             }
             return validated;
         }
+
 
         /// <summary>
         /// Validates the user credentials against those in the SQL database.
@@ -152,6 +154,7 @@ namespace Astro3
         }
 
 
+
         /// <summary>
         /// Creates log entries in the database
         /// </summary>
@@ -177,6 +180,7 @@ namespace Astro3
             log.Date = DateTime.Now;
             SaveLog(log);
         }
+
 
 
         /// <summary>

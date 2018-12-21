@@ -21,13 +21,16 @@ namespace Astro3
     /// </summary>
     public partial class Admin : Page
     {
-
+        //DB Connection
         AstroDBEntities db = new AstroDBEntities();
 
+        //Added for the User tab & used to pull in db information on User
         List<User> users = new List<User>();
+
+        //Added for the Log tab & used to pull in db information on Logs
         List<Log> logs = new List<Log>();
 
-        //Added for the Analysis tab
+        //Added for the Analysis tab & used to pull in db information for User, Access level & Bookings
         List<User> userList = new List<User>();
         List<AccessLevel> accesslevelList = new List<AccessLevel>();
         List<Booking> bookingList = new List<Booking>();
@@ -35,32 +38,49 @@ namespace Astro3
 
         User selectedUser = new User();
 
+
+
+        /// <summary>
+        /// Define enumerator vraiable type based on Administrator selection from options below
+        /// </summary>
         enum DBOperation
         {
             Add,
             Modify,
             Delete
         }
-
+        //Create the instance
         DBOperation dbOperation = new DBOperation();
 
-        //Define enum type for Summary in Analysis
+
+
+
+        /// <summary>
+        /// Define enumerator vraiable type based on Administrator selection from option below
+        /// </summary>
         enum AnalysisType
         {
             Summary
         }
-
+        //Create the instance
         private AnalysisType analysisType = new AnalysisType();
 
-        //Define enum type for DB Table selected in Analysis
+
+
+
+        /// <summary>
+        /// Defines enumerator vraiable type based on Administrator selection from options below
+        /// </summary>
         enum DBTableSelected
         {
             Users,
             AccessLevel,
             Bookings
         }
-
+        //Create the instance
         private DBTableSelected tableSelected = new DBTableSelected();
+
+
 
 
         public Admin()
@@ -69,29 +89,39 @@ namespace Astro3
         }
 
 
+
+        /// <summary>
+        /// On loading page, Refresh the User information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            //On loading page, Refresh the User information from DB
             RefreshUserList();
+            //Set the itemsourcve for the Logs
             lstLogList.ItemsSource = logs;
 
-
+            //Display the log information on screen from DB
             foreach (var log in db.Logs)
             {
                 logs.Add(log);
             }
             cboEditUserAccesslevel.SelectedIndex = 0;
 
-
+            //Display the User information on screen from DB
             foreach (var userRecord in db.Users)
             {
                 userList.Add(userRecord);
             }
 
+            //Display the booking information on screen from DB
             foreach (var bookingRecord in db.Bookings)
             {
                 bookingList.Add(bookingRecord);
             }
 
+            //Display the Access level information on screen from DB
             foreach (var accesslevelRecord in db.AccessLevels)
             {
                 accesslevelList.Add(accesslevelRecord);
@@ -101,6 +131,11 @@ namespace Astro3
 
 
 
+        /// <summary>
+        /// Method for adding a new User
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void submenuAddNewUser_Click(object sender, RoutedEventArgs e)
         {
             stkUserDetails.Visibility = Visibility.Visible;
@@ -109,76 +144,79 @@ namespace Astro3
 
 
 
-
+        /// <summary>
+        /// Method for modifying an existing User
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void submenuModUser_Click(object sender, RoutedEventArgs e)
         {
             stkUserDetails.Visibility = Visibility.Visible;
             dbOperation = DBOperation.Modify;   
-
-            
         }
 
 
 
 
-
+        /// <summary>
+        /// Method for deleting an existing User
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void submenuDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            db.Users.RemoveRange(db.Users.Where(t => t.User_ID == selectedUser.User_ID));
-            int saveSuccess = db.SaveChanges();
-            if(saveSuccess == 1)
+            try
             {
-                MessageBox.Show("User deleted successfully.", "Save to database", MessageBoxButton.OK, MessageBoxImage.Information);
-                RefreshUserList();
-                ClearUserDetails();
-                stkUserDetails.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                MessageBox.Show("Problem deleting User record.", "Delete from database", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-
-        private void cboEditUserAccesslevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var theComboBox = (ComboBox)sender;
-            ComboBoxItem item = (ComboBoxItem)theComboBox.SelectedItem;
-            string value = item.Content.ToString();
-            //MessageBox.Show("Content of combobox is " + value);
-        }
-
-
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            if (dbOperation == DBOperation.Add)
-            {
-                User user = new User();
-                user.Username = tbxUsername.Text.Trim();
-                user.Password = tbxPassword.Text.Trim();
-                user.Surname = tbxSurname.Text.Trim();
-                user.Firstname = tbxFirstname.Text.Trim();
-                user.Club = tbxClub.Text.Trim();
-                user.Email = tbxEmail.Text.Trim();
-                user.Level_ID = cboEditUserAccesslevel.SelectedIndex;
-                int saveSuccess = SaveUser(user);
+                //Remove User where User_ID is equal to the User_ID selected by the Administrator
+                db.Users.RemoveRange(db.Users.Where(t => t.User_ID == selectedUser.User_ID));
+                int saveSuccess = db.SaveChanges();
                 if (saveSuccess == 1)
                 {
-                    MessageBox.Show("User saved successfully.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("User deleted successfully.", "Save to database", MessageBoxButton.OK, MessageBoxImage.Information);
                     RefreshUserList();
                     ClearUserDetails();
                     stkUserDetails.Visibility = Visibility.Collapsed;
                 }
                 else
                 {
-                    MessageBox.Show("Problem saving user record.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    MessageBox.Show("Problem deleting User record.", "Delete from database", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
-            if (dbOperation == DBOperation.Modify)
+            catch (Exception ex)
             {
-                //For every User in the DB equal to the currently selected User record, then update the record
-                foreach (var user in db.Users.Where(t => t.User_ID == selectedUser.User_ID))
+
+                MessageBox.Show(ex.InnerException.ToString());
+            }
+        }
+
+
+
+        /// <summary>
+        /// Method for editing the Access level for a User
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cboEditUserAccesslevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var theComboBox = (ComboBox)sender;
+            ComboBoxItem item = (ComboBoxItem)theComboBox.SelectedItem;
+            string value = item.Content.ToString();
+        }
+
+
+
+        /// <summary>
+        /// Method for Updating the database based on edits made by Administrator
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            if (dbOperation == DBOperation.Add)
+            {
+                try
                 {
+                    User user = new User();
                     user.Username = tbxUsername.Text.Trim();
                     user.Password = tbxPassword.Text.Trim();
                     user.Surname = tbxSurname.Text.Trim();
@@ -186,20 +224,70 @@ namespace Astro3
                     user.Club = tbxClub.Text.Trim();
                     user.Email = tbxEmail.Text.Trim();
                     user.Level_ID = cboEditUserAccesslevel.SelectedIndex;
+                    int saveSuccess = SaveUser(user);
+                    if (saveSuccess == 1)
+                    {
+                        MessageBox.Show("User saved successfully.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Information);
+                        RefreshUserList();
+                        ClearUserDetails();
+                        stkUserDetails.Visibility = Visibility.Collapsed;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Problem saving user record.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.InnerException.ToString());
                 }
 
-                int saveSuccess = db.SaveChanges();
-                if(saveSuccess == 1)
+
+            }
+            if (dbOperation == DBOperation.Modify)
+            {
+                try
                 {
-                    MessageBox.Show("User modified successfully.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Information);
-                    RefreshUserList();
-                    ClearUserDetails();
-                    stkUserDetails.Visibility = Visibility.Collapsed;
+                    //For every User in the DB equal to the currently selected User record, then update the record
+                    foreach (var user in db.Users.Where(t => t.User_ID == selectedUser.User_ID))
+                    {
+                        user.Username = tbxUsername.Text.Trim();
+                        user.Password = tbxPassword.Text.Trim();
+                        user.Surname = tbxSurname.Text.Trim();
+                        user.Firstname = tbxFirstname.Text.Trim();
+                        user.Club = tbxClub.Text.Trim();
+                        user.Email = tbxEmail.Text.Trim();
+                        user.Level_ID = cboEditUserAccesslevel.SelectedIndex;
+                    }
+
+                    int saveSuccess = db.SaveChanges();
+                    if (saveSuccess == 1)
+                    {
+                        MessageBox.Show("User modified successfully.", "Save to Database.", MessageBoxButton.OK, MessageBoxImage.Information);
+                        RefreshUserList();
+                        ClearUserDetails();
+                        stkUserDetails.Visibility = Visibility.Collapsed;
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.InnerException.ToString());
+                }
+                
+
             }
 
         }
 
+
+
+        /// <summary>
+        /// Method for saving a newly added User back to Database
+        /// </summary>
+        /// <param name="user">
+        /// Saves the new User
+        /// </param>
+        /// <returns></returns>
         public int SaveUser(User user)
         {
             db.Entry(user).State = System.Data.Entity.EntityState.Added;
@@ -208,7 +296,9 @@ namespace Astro3
         }
 
 
-        // Refresh User list in database
+        /// <summary>
+        /// Method to update User list with information from Database
+        /// </summary>
         private void RefreshUserList()
         {
             lstUserList.ItemsSource = users;
@@ -221,7 +311,9 @@ namespace Astro3
         }
 
 
-        // Clear Text boxes for adding Users
+        /// <summary>
+        ///  Clear Text boxes for adding Users   
+        /// </summary>
         private void ClearUserDetails()
         {
             tbxUsername.Text = "";
@@ -234,7 +326,14 @@ namespace Astro3
         }
 
 
-        //
+
+
+        /// <summary>
+        /// Method for displaying information vased on a valid option selected by the Administrator 
+        /// Will make the Modify & Delete options available if User selceted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstUserList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lstUserList.SelectedIndex > 0)
@@ -248,7 +347,6 @@ namespace Astro3
                 }
                 if (dbOperation == DBOperation.Modify)
                 {
-
                     tbxUsername.Text = selectedUser.Username;
                     tbxPassword.Text = selectedUser.Password;
                     tbxSurname.Text = selectedUser.Surname;
@@ -257,13 +355,18 @@ namespace Astro3
                     tbxEmail.Text = selectedUser.Email;
                     cboEditUserAccesslevel.SelectedIndex = selectedUser.Level_ID;
                 }
-
             }
         }
 
+
+        /// <summary>
+        /// Method for displaying information vased on a valid option selected by the Administrator 
+        /// Will make the 'Summary' options available if selceted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboAnalysisType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Check that an option has been selected 
             //The selectedIndex will be 0 if an option is not selected
             if (cboAnalysisType.SelectedIndex > 0)
             {
@@ -274,6 +377,14 @@ namespace Astro3
             }
         }
 
+
+
+        /// <summary>
+        /// Method for displaying information vased on a valid option selected by the Administrator 
+        /// Will make the 'Summary' options available if selceted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cboDatabaseTable_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Check that an option has been selected 
@@ -297,6 +408,12 @@ namespace Astro3
             }
         }
 
+
+        /// <summary>
+        /// Method for displaying information vased on a valid option selected by the Administrator 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAnalyse_Click(object sender, RoutedEventArgs e)
         {
             //Clear variables. Record count is used to display
@@ -364,6 +481,11 @@ namespace Astro3
                 tbxAnalysisOutput.Text = output;
             }
 
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            stkUserDetails.Visibility = Visibility.Collapsed;
         }
     }
 }
