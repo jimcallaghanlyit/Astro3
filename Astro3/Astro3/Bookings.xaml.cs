@@ -130,46 +130,56 @@ namespace Astro3
             {
                 if (Weekly.IsChecked == true)
                 {
+                    //Indicates Weekly has been checked
                     newbooking.Frequency = 2;
                 }
                 else
                 {
+                    //Indicates that Daily has been checked
                     newbooking.Frequency = 1;
                 }
 
                 if (Monday.IsChecked == true)
                 {
+                    // 1 for Monday
                     days.Add(1);
                 }
                 if (Tuesday.IsChecked == true)
                 {
+                    //2 for Tuesday
                     days.Add(2);
                 }
                 if (Wednesday.IsChecked == true)
                 {
+                    //3 for Wednesday
                     days.Add(3);
                 }
                 if (Thursday.IsChecked == true)
                 {
+                    //4 for Thursday
                     days.Add(4);
                 }
                 if (Friday.IsChecked == true)
                 {
+                    //5 for Friday
                     days.Add(5);
                 }
 
                 for (int i = 0; i < days.Count(); i++)
                 {
-                    if (!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) //(newbooking.days.Length > 0)
+                    if (!String.IsNullOrEmpty(newbooking.days) && newbooking.days.Length > 0) 
                         newbooking.days += ",";
+                    //Set the newbooking.days value based on days selected
                     newbooking.days += days[i].ToString();
                 }
             }
             else
             {
+                //A once-off booking
                 newbooking.Frequency = 0;
             }
 
+            //Add booking to database
             db.Bookings.Add(newbooking);
             int saveSuccess = db.SaveChanges();
             if (saveSuccess == 1)

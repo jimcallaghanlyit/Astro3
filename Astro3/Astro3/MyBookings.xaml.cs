@@ -41,8 +41,11 @@ namespace Astro3
             InitializeComponent();
         }
 
-               
-        //Populate the list with the Bookings against this User id
+
+ 
+        /// <summary>
+        /// Populate the list with the Bookings against this User id
+        /// </summary>
         private void populateList()
         {
             bookingList.Clear();
