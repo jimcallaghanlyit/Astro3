@@ -17,12 +17,12 @@
             <PropertyRef Name="Booking_ID" />
           </Key>
           <Property Name="Booking_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Creation_Date" Type="datetime" Nullable="false" />
+          <Property Name="Creation_Date" Type="date" Nullable="false" />
           <Property Name="User_ID" Type="int" Nullable="false" />
-          <Property Name="Last_Update_Date" Type="datetime" Nullable="false" />
+          <Property Name="Last_Update_Date" Type="date" Nullable="false" />
           <Property Name="Created_By" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Updated_By" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Slot_Date" Type="datetime" Nullable="false" />
+          <Property Name="Slot_Date" Type="date" Nullable="false" />
           <Property Name="Slot_time" Type="int" Nullable="false" />
           <Property Name="Frequency" Type="int" />
           <Property Name="days" Type="nvarchar" MaxLength="50" />
@@ -123,13 +123,13 @@
             <PropertyRef Name="Booking_ID" />
           </Key>
           <Property Name="Booking_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creation_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="User_ID" Type="Int32" Nullable="false" />
-          <Property Name="Last_Update_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Last_Update_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Created_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Updated_By" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="User" Relationship="AstroDBModel.FK_Booking_To_User" FromRole="Booking" ToRole="User" />
-          <Property Name="Slot_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Slot_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Slot_time" Type="Int32" Nullable="false" />
           <Property Name="Frequency" Type="Int32" />
           <Property Name="days" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

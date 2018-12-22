@@ -120,7 +120,7 @@ namespace Astro3
         {
             newbooking.User_ID= user.User_ID;
             newbooking.Updated_By = newbooking.Created_By = user.Username;
-            newbooking.Slot_Date = calCalendar.DisplayDate;
+            newbooking.Slot_Date = calCalendar.SelectedDate.Value;
             newbooking.Creation_Date = newbooking.Last_Update_Date = DateTime.Today;
             
             string digits = new String(cboAvailableSlots.SelectedItem.ToString().TakeWhile(Char.IsDigit).ToArray());
