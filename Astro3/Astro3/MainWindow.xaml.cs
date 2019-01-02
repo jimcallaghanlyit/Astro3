@@ -24,7 +24,8 @@ namespace Astro3
     {
 
         AstroDBEntities db = new AstroDBEntities();
-     
+
+        LoginProcess loginProcess = new LoginProcess();
 
         public MainWindow()
         {
@@ -46,7 +47,7 @@ namespace Astro3
                 bool credentialsValidated = false;
                 string currentUser = tbxUsername.Text;
                 string currentPassword = tbxPassword.Password;
-                credentialsValidated = ValidateUserInput(currentUser, currentPassword);
+                credentialsValidated = loginProcess.ValidateUserInput(currentUser, currentPassword);
                 if (credentialsValidated)
                 {
                     validatedUser = GetUserRecord(currentUser, currentPassword);
@@ -79,55 +80,6 @@ namespace Astro3
 
 
 
-        /// <summary>
-        /// Validates the user credentials against those in the SQL database.
-        /// </summary>
-        /// <param name="username">
-        /// Username entered by the user.
-        /// </param>
-        /// <param name="password">
-        /// Password entered by the user.
-        /// </param>
-        /// <returns>
-        /// Validated user.
-        /// </returns>
-        private bool ValidateUserInput(string username, string password)
-        {
-            bool validated = true;
-            try
-            {
-                // Check username length & ensure not more 
-                // or less than specfified in DB table
-                if (username.Length == 0 || username.Length > 30)
-                {
-                    validated = false;
-                }
-                // Check each character in Username and 
-                // make sure no numbers being used
-                foreach (char ch in username)
-                {
-                    if (ch >= '0' && ch <= '9')
-                    {
-                        validated = false;
-                    }
-                }
-                // Check password length & ensure not more 
-                // or less than specfified in DB table
-                if (password.Length == 0 || password.Length > 30)
-                {
-                    validated = false;
-                }
-            }
-            catch (Exception)
-            {
-
-                validated = false;
-            }
-            //It is easier to set validated to false
-            //inside on on of the checks than it is
-            //to validate each check
-            return validated;
-        }
 
 
         /// <summary>
